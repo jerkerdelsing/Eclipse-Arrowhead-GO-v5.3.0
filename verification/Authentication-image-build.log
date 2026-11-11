@@ -1,0 +1,54 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 624B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/golang:1.27-alpine
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 93B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [build 1/6] FROM docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d
+#5 resolve docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d 0.0s done
+#5 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 351.02kB 0.0s done
+#4 DONE 0.0s
+
+#6 [build 2/6] WORKDIR /src
+#6 CACHED
+
+#7 [build 3/6] COPY go.mod go.sum ./
+#7 DONE 0.0s
+
+#8 [build 4/6] RUN --mount=type=cache,target=/go/pkg/mod go mod download
+#8 DONE 1.1s
+
+#9 [build 5/6] COPY . .
+#9 DONE 0.1s
+
+#10 [build 6/6] RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build go build -trimpath -o /out/Authentication ./cmd/authentication
+#10 DONE 4.7s
+
+#11 [stage-1 1/1] COPY --from=build /out/Authentication /usr/local/bin/Authentication
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.3s done
+#12 exporting manifest sha256:dbfbeb7f50f1ac2a5f8e3bf95a640490d31b556d9fcb3d0b8f9687cbc9a7b212 done
+#12 exporting config sha256:f44382ce3c240f0fb1b8eae427bfba29b4252fbf6e696293200729ae9f6ee725 done
+#12 exporting attestation manifest sha256:79be12c03f499895ef77551036755104bc69aae839a748eb796566e3a466abbd done
+#12 exporting manifest list sha256:81336dc0d806efe092a15daa1b37c31c0d694008e98c8636544d90a41390e7be done
+#12 naming to docker.io/eclipse-arrowhead-go-reorg/authentication:20261028 done
+#12 unpacking to docker.io/eclipse-arrowhead-go-reorg/authentication:20261028 0.0s done
+#12 DONE 0.4s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/upt80g3qnwn6e2i6co4e3ws8l

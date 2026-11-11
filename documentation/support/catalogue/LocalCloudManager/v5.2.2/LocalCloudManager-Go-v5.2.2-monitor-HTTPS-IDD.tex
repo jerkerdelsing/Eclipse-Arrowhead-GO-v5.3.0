@@ -1,0 +1,17 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl,enumitem}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{nosep,leftmargin=*}
+\begin{document}
+\ArrowheadTitle{LocalCloudManager / monitor-HTTPS-IDD (Go)}\ArrowheadType{Interface Design Description}\ArrowheadTypeShort{Go}
+\ArrowheadVersion{1.0.0}\ArrowheadDate{2026-10-17}
+\ArrowheadAuthor{Eclipse Arrowhead migration project}\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Project maintainers}\ArrowheadFooter{Eclipse Arrowhead -- Go LocalCloudManager -- EPL-2.0}
+\ArrowheadSetup
+\section{Legacy HTTPS echo}
+Request \path|GET /localcloud/monitor/echo|, no body. Secure mode requires a verified local certificate and valid bound Arrowhead identity token. Response200text \path|Got it!|. Authentication failures401. No operator-console cookie is substituted for this legacy Arrowhead identity check. The shared handler accepts echo suffixes broadly; this is a compatibility route, not a strict operation inventory or canonical sysMonitor interface.
+\section{References and verification}
+Authoritative moved code: LocalCloudManager/internal/cloud and embedded ui sources. Exact original/relocated SHA256 hashes are in docs/source-manifest.json. docs/legacy preserves the earlier local Markdown/SysML, not an endorsement of its parity claims. The revised SysML variability model is descriptive and has not been checked by a SysML parser. Executed checks and qualification limits are recorded in VERIFICATION.md. Source movement does not deploy or alter running clouds.
+\end{document}

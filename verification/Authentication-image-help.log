@@ -1,0 +1,3 @@
+Usage of /usr/local/bin/Authentication:
+  -config string
+    	configuration file (default "config.json")

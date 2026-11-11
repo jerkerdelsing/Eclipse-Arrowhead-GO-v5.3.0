@@ -1,0 +1,26 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{interfaceBridgeManagement (TestTranslation)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-24}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service interfaceBridgeManagement}
+Version 1.0.0, provider TestTranslation, base path \path{/testtranslation}. Metadata \texttt{interfaceBridge.from = [generic\_https]}, \texttt{interfaceBridge.to = generic\_https} (the TranslationManager's lookup requirements: \texttt{from} CONTAINS\_ANY the consumer's templates, \texttt{to} IN the target's templates).
+\begin{longtable}{p{0.22\textwidth}p{0.70\textwidth}}\toprule
+Operation & Behaviour\\\midrule\endhead
+\texttt{check-targets} & \texttt{\{targetOperation, targets:[\{instanceId, interfaces\}]\}} $\rightarrow$ \texttt{\{targets\}}: the reachable targets with their usable interfaces.\\
+\texttt{initialize-bridge} & \texttt{TranslationBridgeInitializationRequestDTO} $\rightarrow$ the bridge interface (\texttt{ServiceInstanceInterfaceResponseDTO}).\\
+\texttt{abort-bridge} & path parameter bridge id appended to the registered path; ends the bridge.\\
+\bottomrule\end{longtable}
+\end{document}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LocalCloudConfigurator</title>
+<style>
+:root { --bg:#f6f7f9; --fg:#1d2330; --muted:#5d6675; --card:#fff; --line:#d9dde4; --accent:#1f6feb; --ok:#1a7f37; --warn:#9a6700; --bad:#cf222e; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1218; --fg:#e6e9ef; --muted:#9aa3b2; --card:#171b23; --line:#2b313c; --accent:#4c8dff; --ok:#3fb950; --warn:#d29922; --bad:#f85149; } }
+* { box-sizing: border-box; }
+body { margin:0; font:15px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+main { max-width:1000px; margin:0 auto; padding:16px; }
+h1 { font-size:22px; margin:8px 0 4px; } h2 { font-size:16px; margin:20px 0 8px; }
+.muted { color:var(--muted); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
+table { width:100%; border-collapse:collapse; } td, th { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { font-weight:600; color:var(--muted); font-size:13px; }
+.state { font-size:12px; padding:2px 8px; border-radius:10px; border:1px solid var(--line); white-space:nowrap; }
+.running,.success { color:var(--ok); } .alternate,.partial,.waiting { color:var(--warn); } .failed { color:var(--bad); }
+button { font:inherit; padding:7px 14px; border-radius:6px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+.row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:12px 0; }
+input[type=password] { font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--fg); min-width:0; flex:1; max-width:340px; }
+pre { white-space:pre-wrap; word-break:break-word; font-size:12px; margin:4px 0 0; color:var(--muted); }
+.err { color:var(--bad); }
+</style>
+</head>
+<body>
+<main>
+<h1>LocalCloudConfigurator</h1>
+<div class="muted" id="cloud">Arrowhead 5.2.2 local cloud, deployed through ColonyOS</div>
+<div class="row" id="login">
+  <input type="password" id="token" placeholder="Operator token" autocomplete="off">
+  <button class="primary" id="connect">Connect</button>
+</div>
+<div id="err" class="err"></div>
+<div id="app" hidden>
+  <h2>Systems</h2>
+  <div class="card"><table><thead><tr><th>Run</th><th>Remove</th><th>System</th><th>Kind</th><th>State</th></tr></thead><tbody id="systems"></tbody></table></div>
+  <div class="row">
+    <label><input type="checkbox" id="smoke"> Run smoke test afterwards</label>
+    <label><input type="checkbox" id="reapply"> Re-apply identities and policies</label>
+  </div>
+  <div class="row"><button id="refresh">Refresh state</button><button id="preview">Preview plan</button><button class="primary" id="apply">Apply through ColonyOS</button></div>
+  <h2>Plan</h2><div class="card" id="plan"><span class="muted">No plan yet.</span></div>
+  <h2>Deployment</h2><div class="card" id="deployment"><span class="muted">Nothing submitted.</span></div>
+</div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

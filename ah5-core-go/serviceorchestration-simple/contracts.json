@@ -1,0 +1,456 @@
+{
+  "notice": "Route presence only. Does not establish DTO, security, persistence, MQTT or behavioral equivalence. ServiceRegistry is a separately tested pre-existing module.",
+  "systems": [
+    {
+      "role": "authentication",
+      "javaHTTPRoutes": [
+        {
+          "method": "GET",
+          "path": "/authentication/general/mgmt/get-config",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "96b9a83502d92f31834a578e11fb864ea411653824ef932e372f4b93cd03081f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/general/mgmt/logs",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "96b9a83502d92f31834a578e11fb864ea411653824ef932e372f4b93cd03081f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/identity/change",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/IdentityAPI.java",
+          "sourceSHA256": "9c9d6c1982c5f04afe359916ee882375f3d72da5e906c69d9343acc8b4a4d14f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/identity/login",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/IdentityAPI.java",
+          "sourceSHA256": "9c9d6c1982c5f04afe359916ee882375f3d72da5e906c69d9343acc8b4a4d14f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/identity/logout",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/IdentityAPI.java",
+          "sourceSHA256": "9c9d6c1982c5f04afe359916ee882375f3d72da5e906c69d9343acc8b4a4d14f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/authentication/identity/verify/{token}",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/IdentityAPI.java",
+          "sourceSHA256": "9c9d6c1982c5f04afe359916ee882375f3d72da5e906c69d9343acc8b4a4d14f",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/mgmt/identities/query",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/authentication/mgmt/identities",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/mgmt/identities",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "PUT",
+          "path": "/authentication/mgmt/identities",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/authentication/mgmt/sessions",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/authentication/mgmt/sessions",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/ManagementAPI.java",
+          "sourceSHA256": "fdda5ec1c3047956743b5f8ec8c1b8b13f1793725de03119e3059fd1e11e875d",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/authentication/monitor/echo",
+          "source": "authentication/src/main/java/eu/arrowhead/authentication/api/http/MonitorAPI.java",
+          "sourceSHA256": "ac13dd23f3870b1fe22ea54429f91bde11367ae62fc77284148e3f1cf5ca8a68",
+          "goRoutePresent": true
+        }
+      ],
+      "unresolvedExpressions": []
+    },
+    {
+      "role": "consumer-authorization",
+      "javaHTTPRoutes": [
+        {
+          "method": "DELETE",
+          "path": "/consumerauthorization/authorization-token/encryption-key",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenAPI.java",
+          "sourceSHA256": "5586fa224f46ce11b7595b95562702c6e1d01a1441802c53c5c1ef3520aeefac",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization-token/encryption-key",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenAPI.java",
+          "sourceSHA256": "5586fa224f46ce11b7595b95562702c6e1d01a1441802c53c5c1ef3520aeefac",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization-token/generate",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenAPI.java",
+          "sourceSHA256": "5586fa224f46ce11b7595b95562702c6e1d01a1441802c53c5c1ef3520aeefac",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/consumerauthorization/authorization-token/public-key",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenAPI.java",
+          "sourceSHA256": "5586fa224f46ce11b7595b95562702c6e1d01a1441802c53c5c1ef3520aeefac",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/consumerauthorization/authorization-token/token/verify/{token}",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenAPI.java",
+          "sourceSHA256": "5586fa224f46ce11b7595b95562702c6e1d01a1441802c53c5c1ef3520aeefac",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/grant",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationAPI.java",
+          "sourceSHA256": "5d9ec4230b792b33ce0e974e730361914d8475bd3f5e643a174e4c4ffcf18904",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/lookup",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationAPI.java",
+          "sourceSHA256": "5d9ec4230b792b33ce0e974e730361914d8475bd3f5e643a174e4c4ffcf18904",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/check",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationManagementAPI.java",
+          "sourceSHA256": "bf273894167d7fe0b0c6fd1e297783d1b5adada6eba71d4d2d85838da7d283da",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/grant",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationManagementAPI.java",
+          "sourceSHA256": "bf273894167d7fe0b0c6fd1e297783d1b5adada6eba71d4d2d85838da7d283da",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/query",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationManagementAPI.java",
+          "sourceSHA256": "bf273894167d7fe0b0c6fd1e297783d1b5adada6eba71d4d2d85838da7d283da",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/consumerauthorization/authorization/mgmt/revoke",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationManagementAPI.java",
+          "sourceSHA256": "bf273894167d7fe0b0c6fd1e297783d1b5adada6eba71d4d2d85838da7d283da",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/consumerauthorization/authorization/mgmt/token/encryption-key",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenManagementAPI.java",
+          "sourceSHA256": "9fb48df3f3e620822082aaf54c7d67fbc372397639f88be45b940df554ca2543",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/token/encryption-key",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenManagementAPI.java",
+          "sourceSHA256": "9fb48df3f3e620822082aaf54c7d67fbc372397639f88be45b940df554ca2543",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/token/generate",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenManagementAPI.java",
+          "sourceSHA256": "9fb48df3f3e620822082aaf54c7d67fbc372397639f88be45b940df554ca2543",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/mgmt/token/query",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenManagementAPI.java",
+          "sourceSHA256": "9fb48df3f3e620822082aaf54c7d67fbc372397639f88be45b940df554ca2543",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/consumerauthorization/authorization/mgmt/token/revoke",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationTokenManagementAPI.java",
+          "sourceSHA256": "9fb48df3f3e620822082aaf54c7d67fbc372397639f88be45b940df554ca2543",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/consumerauthorization/authorization/revoke/{instanceId}",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationAPI.java",
+          "sourceSHA256": "5d9ec4230b792b33ce0e974e730361914d8475bd3f5e643a174e4c4ffcf18904",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/authorization/verify",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/AuthorizationAPI.java",
+          "sourceSHA256": "5d9ec4230b792b33ce0e974e730361914d8475bd3f5e643a174e4c4ffcf18904",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/consumerauthorization/general/mgmt/get-config",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "d8e7b2342ca58211de43d5bab0892b1d417db2e3d7bb336d27cb47f0dd23ab47",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/consumerauthorization/general/mgmt/logs",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "d8e7b2342ca58211de43d5bab0892b1d417db2e3d7bb336d27cb47f0dd23ab47",
+          "goRoutePresent": true
+        },
+        {
+          "method": "GET",
+          "path": "/consumerauthorization/monitor/echo",
+          "source": "consumer-authorization/src/main/java/eu/arrowhead/authorization/api/http/MonitorAPI.java",
+          "sourceSHA256": "2b970ace58bcdf1931cb360fc613694816fe429219941b0b62f9391aec10b276",
+          "goRoutePresent": true
+        }
+      ],
+      "unresolvedExpressions": []
+    },
+    {
+      "role": "serviceorchestration-dynamic",
+      "javaHTTPRoutes": [
+        {
+          "method": "GET",
+          "path": "/serviceorchestration/general/mgmt/get-config",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "aa642b392be122d273f8258a0de2106a767ac168922c47c5e5ffb54b1848b7ea",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/general/mgmt/logs",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "aa642b392be122d273f8258a0de2106a767ac168922c47c5e5ffb54b1848b7ea",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/history/query",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationHistoryManagementAPI.java",
+          "sourceSHA256": "2434b73f992e9cab696da9eaeb550d5c8030bb45ca60dcf60f40257aa1372688",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/lock/create",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationLockManagementAPI.java",
+          "sourceSHA256": "b36fec060630a5b31ec286d0e0d99fb6b7c5f279d5abaffcf02e9cc8a6cea8e0",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/lock/query",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationLockManagementAPI.java",
+          "sourceSHA256": "b36fec060630a5b31ec286d0e0d99fb6b7c5f279d5abaffcf02e9cc8a6cea8e0",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/mgmt/lock/remove/{owner}",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationLockManagementAPI.java",
+          "sourceSHA256": "b36fec060630a5b31ec286d0e0d99fb6b7c5f279d5abaffcf02e9cc8a6cea8e0",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/query",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "96312efc03c5c7e0e0b5fe111741f06ea946e7325186c260eccf6236461f5fd5",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/subscribe",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "96312efc03c5c7e0e0b5fe111741f06ea946e7325186c260eccf6236461f5fd5",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/trigger",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "96312efc03c5c7e0e0b5fe111741f06ea946e7325186c260eccf6236461f5fd5",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/mgmt/push/unsubscribe",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "96312efc03c5c7e0e0b5fe111741f06ea946e7325186c260eccf6236461f5fd5",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/pull",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "22629b2299ecb50cc05b8e3dc4eb19e1af79b6f184d6ddbe6fe5e0e39950b4e8",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/subscribe",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "22629b2299ecb50cc05b8e3dc4eb19e1af79b6f184d6ddbe6fe5e0e39950b4e8",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/unsubscribe/{id}",
+          "source": "serviceorchestration-dynamic/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "22629b2299ecb50cc05b8e3dc4eb19e1af79b6f184d6ddbe6fe5e0e39950b4e8",
+          "goRoutePresent": true
+        }
+      ],
+      "unresolvedExpressions": []
+    },
+    {
+      "role": "serviceorchestration-simple",
+      "javaHTTPRoutes": [
+        {
+          "method": "GET",
+          "path": "/serviceorchestration/general/mgmt/get-config",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "be3d3a25ff093a75b9564bf63890e7142ed3cd7f2144b5bb21657067e007d760",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/general/mgmt/logs",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/GeneralManagementAPI.java",
+          "sourceSHA256": "be3d3a25ff093a75b9564bf63890e7142ed3cd7f2144b5bb21657067e007d760",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/history/query",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationHistoryManagementAPI.java",
+          "sourceSHA256": "3664e54cb4b776e2b858f0bdac58da7cac8e64a3297cbeb547fdb32b17464721",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/query",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "884b7e553fff84a1e3f4b32e54cd8d61fe74cabe569c89524b7e00c4b197389e",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/subscribe",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "884b7e553fff84a1e3f4b32e54cd8d61fe74cabe569c89524b7e00c4b197389e",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/push/trigger",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "884b7e553fff84a1e3f4b32e54cd8d61fe74cabe569c89524b7e00c4b197389e",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/mgmt/push/unsubscribe",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationPushManagementAPI.java",
+          "sourceSHA256": "884b7e553fff84a1e3f4b32e54cd8d61fe74cabe569c89524b7e00c4b197389e",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/simple-store/create",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationStoreManagementAPI.java",
+          "sourceSHA256": "cbf4f9671f2ea5d192c9b5b73416225940aefe5004169adbcb8ce382ef887aa2",
+          "goRoutePresent": true
+        },
+        {
+          "method": "PUT",
+          "path": "/serviceorchestration/orchestration/mgmt/simple-store/modify-priorities",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationStoreManagementAPI.java",
+          "sourceSHA256": "cbf4f9671f2ea5d192c9b5b73416225940aefe5004169adbcb8ce382ef887aa2",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/mgmt/simple-store/query",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationStoreManagementAPI.java",
+          "sourceSHA256": "cbf4f9671f2ea5d192c9b5b73416225940aefe5004169adbcb8ce382ef887aa2",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/mgmt/simple-store/remove",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationStoreManagementAPI.java",
+          "sourceSHA256": "cbf4f9671f2ea5d192c9b5b73416225940aefe5004169adbcb8ce382ef887aa2",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/pull",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "1a7c34178cce34a26fada9bae55f81f8e8c82dbcf55554d34a13f226a8885c4b",
+          "goRoutePresent": true
+        },
+        {
+          "method": "POST",
+          "path": "/serviceorchestration/orchestration/subscribe",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "1a7c34178cce34a26fada9bae55f81f8e8c82dbcf55554d34a13f226a8885c4b",
+          "goRoutePresent": true
+        },
+        {
+          "method": "DELETE",
+          "path": "/serviceorchestration/orchestration/unsubscribe/{id}",
+          "source": "serviceorchestration-simple/src/main/java/eu/arrowhead/serviceorchestration/api/http/OrchestrationAPI.java",
+          "sourceSHA256": "1a7c34178cce34a26fada9bae55f81f8e8c82dbcf55554d34a13f226a8885c4b",
+          "goRoutePresent": true
+        }
+      ],
+      "unresolvedExpressions": []
+    }
+  ]
+}

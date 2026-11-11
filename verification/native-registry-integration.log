@@ -1,0 +1,9 @@
+=== RUN   TestNativeServiceRegistryIntegration
+2026/10/28 22:44:47 orchestration pull requester=Consumer requirement=map[operations:[read] serviceDefinition:temperature] flags=map[] results=0 error=false
+2026/10/28 22:44:47 orchestration pull requester=Consumer requirement=map[operations:[read] serviceDefinition:humidity] flags=map[] results=0 error=false
+2026/10/28 22:44:47 orchestration pull requester=Consumer requirement=map[serviceDefinition:humidity] flags=map[] results=0 error=false
+    registry_process_test.go:134: serviceorchestration-dynamic register serviceOrchestration: Upstream ServiceRegistry rejected request
+--- FAIL: TestNativeServiceRegistryIntegration (1.97s)
+FAIL
+FAIL	arrowhead/ah5-core-go/authentication/internal/core	2.216s
+FAIL

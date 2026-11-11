@@ -1,0 +1,26 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{dataModelTranslation (TestTranslation)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-24}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service dataModelTranslation}
+Version 1.0.0, provider TestTranslation, base path \path{/testtranslation}. Metadata \texttt{dataModelIds = [[simpleJson, senml], [senml, simpleJson]]} (supported directions; the TranslationManager looks up \texttt{dataModelIds} CONTAINS \texttt{[from, to]}).
+\begin{longtable}{p{0.25\textwidth}p{0.67\textwidth}}\toprule
+Operation & Behaviour\\\midrule\endhead
+\texttt{init-translation} & \texttt{\{inputModelId, outputModelId, payload, settings\}} $\rightarrow$ 201 \texttt{\{translationId\}}.\\
+\texttt{get-translation-result} & path parameter translation id $\rightarrow$ \texttt{\{status: PENDING|IN\_PROGRESS|DONE|ERROR, result, mimeType\}}.\\
+\texttt{abort-translation} & path parameter translation id; forgets the task.\\
+\bottomrule\end{longtable}
+\end{document}

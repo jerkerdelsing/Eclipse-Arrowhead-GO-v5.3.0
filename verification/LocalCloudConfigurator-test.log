@@ -1,0 +1,95 @@
+{"Time":"2026-11-09T10:29:32.391566+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator"}
+{"Time":"2026-11-09T10:29:32.39167+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Test":"TestResolveListen"}
+{"Time":"2026-11-09T10:29:32.391678+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Test":"TestResolveListen","Output":"=== RUN   TestResolveListen\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.391694+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Test":"TestResolveListen","Output":"--- PASS: TestResolveListen (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.391699+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Test":"TestResolveListen","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.391707+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.391712+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Output":"ok  \tarrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator\t(cached)\n"}
+{"Time":"2026-11-09T10:29:32.391717+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/cmd/localcloudconfigurator","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.393665+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api"}
+{"Time":"2026-11-09T10:29:32.393683+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestAuthRequired"}
+{"Time":"2026-11-09T10:29:32.393689+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestAuthRequired","Output":"=== RUN   TestAuthRequired\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393698+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestAuthRequired","Output":"--- PASS: TestAuthRequired (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393704+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestAuthRequired","Elapsed":0.01}
+{"Time":"2026-11-09T10:29:32.393717+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestStatusShowsAlternates"}
+{"Time":"2026-11-09T10:29:32.393721+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestStatusShowsAlternates","Output":"=== RUN   TestStatusShowsAlternates\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393726+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestStatusShowsAlternates","Output":"--- PASS: TestStatusShowsAlternates (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393732+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestStatusShowsAlternates","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.393737+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestDeploySubmitsPlan"}
+{"Time":"2026-11-09T10:29:32.39374+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestDeploySubmitsPlan","Output":"=== RUN   TestDeploySubmitsPlan\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393745+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestDeploySubmitsPlan","Output":"--- PASS: TestDeploySubmitsPlan (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393749+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestDeploySubmitsPlan","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.393759+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestBadRequests"}
+{"Time":"2026-11-09T10:29:32.393765+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestBadRequests","Output":"=== RUN   TestBadRequests\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393771+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestBadRequests","Output":"--- PASS: TestBadRequests (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393776+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Test":"TestBadRequests","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.39378+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.393786+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Output":"ok  \tarrowhead/ah5-support-go/localcloudconfigurator/internal/api\t(cached)\n"}
+{"Time":"2026-11-09T10:29:32.393791+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/api","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.397027+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog"}
+{"Time":"2026-11-09T10:29:32.397048+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestShippedCatalogLoads"}
+{"Time":"2026-11-09T10:29:32.397055+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestShippedCatalogLoads","Output":"=== RUN   TestShippedCatalogLoads\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397063+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestShippedCatalogLoads","Output":"--- PASS: TestShippedCatalogLoads (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397068+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestShippedCatalogLoads","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.397073+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestClosureAndOrder"}
+{"Time":"2026-11-09T10:29:32.397077+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestClosureAndOrder","Output":"=== RUN   TestClosureAndOrder\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397082+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestClosureAndOrder","Output":"--- PASS: TestClosureAndOrder (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397086+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestClosureAndOrder","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.397089+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestValidation"}
+{"Time":"2026-11-09T10:29:32.397093+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestValidation","Output":"=== RUN   TestValidation\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397097+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestValidation","Output":"--- PASS: TestValidation (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397101+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Test":"TestValidation","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.397105+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.397115+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Output":"ok  \tarrowhead/ah5-support-go/localcloudconfigurator/internal/catalog\t(cached)\n"}
+{"Time":"2026-11-09T10:29:32.39712+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/catalog","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.397423+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/colony"}
+{"Time":"2026-11-09T10:29:32.397434+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/colony","Output":"?   \tarrowhead/ah5-support-go/localcloudconfigurator/internal/colony\t[no test files]\n"}
+{"Time":"2026-11-09T10:29:32.39744+01:00","Action":"skip","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/colony","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.399682+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner"}
+{"Time":"2026-11-09T10:29:32.399716+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestFreshSystemGetsProvisionUpPolicy"}
+{"Time":"2026-11-09T10:29:32.399724+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestFreshSystemGetsProvisionUpPolicy","Output":"=== RUN   TestFreshSystemGetsProvisionUpPolicy\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399731+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestFreshSystemGetsProvisionUpPolicy","Output":"--- PASS: TestFreshSystemGetsProvisionUpPolicy (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399736+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestFreshSystemGetsProvisionUpPolicy","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.399742+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlternateLeftAlone"}
+{"Time":"2026-11-09T10:29:32.399745+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlternateLeftAlone","Output":"=== RUN   TestAlternateLeftAlone\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.39975+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlternateLeftAlone","Output":"--- PASS: TestAlternateLeftAlone (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399754+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlternateLeftAlone","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.399759+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlreadyRunningIsNoop"}
+{"Time":"2026-11-09T10:29:32.399762+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlreadyRunningIsNoop","Output":"=== RUN   TestAlreadyRunningIsNoop\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399767+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlreadyRunningIsNoop","Output":"--- PASS: TestAlreadyRunningIsNoop (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399771+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestAlreadyRunningIsNoop","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.399775+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestRemove"}
+{"Time":"2026-11-09T10:29:32.399778+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestRemove","Output":"=== RUN   TestRemove\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399782+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestRemove","Output":"--- PASS: TestRemove (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399792+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestRemove","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.399797+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestUnknownSystem"}
+{"Time":"2026-11-09T10:29:32.3998+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestUnknownSystem","Output":"=== RUN   TestUnknownSystem\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399803+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestUnknownSystem","Output":"--- PASS: TestUnknownSystem (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399807+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Test":"TestUnknownSystem","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.39981+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.399815+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Output":"ok  \tarrowhead/ah5-support-go/localcloudconfigurator/internal/planner\t(cached)\n"}
+{"Time":"2026-11-09T10:29:32.399819+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/planner","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406153+01:00","Action":"start","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner"}
+{"Time":"2026-11-09T10:29:32.406178+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestUpUsesNoDeps"}
+{"Time":"2026-11-09T10:29:32.406184+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestUpUsesNoDeps","Output":"=== RUN   TestUpUsesNoDeps\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406194+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestUpUsesNoDeps","Output":"--- PASS: TestUpUsesNoDeps (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406199+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestUpUsesNoDeps","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406204+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRejectsUncataloguedTargets"}
+{"Time":"2026-11-09T10:29:32.406208+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRejectsUncataloguedTargets","Output":"=== RUN   TestRejectsUncataloguedTargets\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406223+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRejectsUncataloguedTargets","Output":"--- PASS: TestRejectsUncataloguedTargets (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406258+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRejectsUncataloguedTargets","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406267+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestScriptRunsFromCloudDir"}
+{"Time":"2026-11-09T10:29:32.406273+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestScriptRunsFromCloudDir","Output":"=== RUN   TestScriptRunsFromCloudDir\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.40628+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestScriptRunsFromCloudDir","Output":"--- PASS: TestScriptRunsFromCloudDir (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406297+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestScriptRunsFromCloudDir","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406303+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRunningParsesBothFormats"}
+{"Time":"2026-11-09T10:29:32.406307+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRunningParsesBothFormats","Output":"=== RUN   TestRunningParsesBothFormats\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406312+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRunningParsesBothFormats","Output":"--- PASS: TestRunningParsesBothFormats (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406317+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRunningParsesBothFormats","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406321+01:00","Action":"run","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRedact"}
+{"Time":"2026-11-09T10:29:32.406326+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRedact","Output":"=== RUN   TestRedact\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406332+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRedact","Output":"--- PASS: TestRedact (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406336+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Test":"TestRedact","Elapsed":0}
+{"Time":"2026-11-09T10:29:32.406341+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:32.406347+01:00","Action":"output","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Output":"ok  \tarrowhead/ah5-support-go/localcloudconfigurator/internal/runner\t(cached)\n"}
+{"Time":"2026-11-09T10:29:32.406354+01:00","Action":"pass","Package":"arrowhead/ah5-support-go/localcloudconfigurator/internal/runner","Elapsed":0}

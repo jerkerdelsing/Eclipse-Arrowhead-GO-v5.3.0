@@ -1,0 +1,31 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{qualityEvaluation (Go)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service overview}
+Definition: \path{qualityEvaluation}, version 1.0.0. Produced by \texttt{DeviceQoSEvaluator}; HTTPS uses \texttt{generic\_https} and \texttt{CERT\_AUTH}. Consumption authorization and management restrictions are additionally enforced at the application layer. Base path: \path{/deviceqosevaluator}.
+\section{Operations}
+\begin{description}
+\item[filter] \texttt{POST} \path{/qualityevaluation/filter}.
+\item[sort] \texttt{POST} \path{/qualityevaluation/sort}.
+\end{description}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Uses explicit DeviceMeasurementAgent input. The complete Java SNMP/OID discovery, augmentation and scaling engine is not ported; scores are weighted window means with missing-data rejection.
+\end{itemize}
+\section{Interface contract}
+See the system HTTPS IDD and the Java source inventory for DTO fields and reference traceability. Successful local tests do not establish all Java behavioral or failure semantics.\end{document}

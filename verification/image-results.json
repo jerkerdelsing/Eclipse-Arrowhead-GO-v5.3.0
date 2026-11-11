@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Authentication",
+    "image": "eclipse-arrowhead-go-reorg/authentication:20261028",
+    "sourceBuild": true,
+    "isolatedHelp": true
+  },
+  {
+    "name": "Blacklist",
+    "image": "eclipse-arrowhead-go-reorg/blacklist:20261028",
+    "sourceBuild": true,
+    "isolatedHelp": true
+  },
+  {
+    "name": "ServiceRegistry",
+    "image": "eclipse-arrowhead-go-reorg/serviceregistry:20261028",
+    "sourceBuild": true,
+    "isolatedHelp": true
+  },
+  {
+    "name": "LocalCloudManager",
+    "image": "eclipse-arrowhead-go-reorg/localcloudmanager:20261028",
+    "sourceBuild": true,
+    "isolatedHelp": true
+  }
+]

@@ -1,0 +1,1 @@
+LocalCloudManager: native Go operator console. Configure through environment variables; see README.md. Default system listener :8480 (mutual TLS).

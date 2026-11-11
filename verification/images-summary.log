@@ -1,0 +1,4 @@
+Authentication: source-only Docker build and isolated help PASS
+Blacklist: source-only Docker build and isolated help PASS
+ServiceRegistry: source-only Docker build and isolated help PASS
+LocalCloudManager: source-only Docker build and isolated help PASS

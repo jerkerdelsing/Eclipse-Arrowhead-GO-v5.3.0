@@ -1,0 +1,41 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{DataManager HTTPS / Go}
+\ArrowheadType{Interface Design Description}
+\ArrowheadTypeShort{IDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Interface overview}
+HTTPS, mandatory mutual TLS, Arrowhead identity-token header and JSON request/response documents. General management is sysop/whitelist protected; enrollment endpoints use approved certificate fingerprints and profile/serial checks instead of ordinary identity tokens. Error responses contain errorMessage, errorCode, origin and timestamp. Exact DTO and status/error parity is not certified.
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/datamanager/data-historian/systems} & identity\\
+\texttt{GET} & \path{/datamanager/data-historian/systems/{systemName}/services} & identity\\
+\texttt{GET} & \path{/datamanager/data-historian/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{PUT} & \path{/datamanager/data-historian/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems/{systemName}/services} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{PUT} & \path{/datamanager/data-proxy/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{GET} & \path{/datamanager/monitor/echo} & certificate\\
+\texttt{GET} & \path{/datamanager/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/datamanager/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Historian packs are persisted locally. Proxy resolves registered HTTPS get-data/put-data operations and uses its own identity. Complete SenML normalization, signalCount semantics, Java provider-configuration and MQTT ingestion are not ported.
+\end{itemize}
+\end{document}

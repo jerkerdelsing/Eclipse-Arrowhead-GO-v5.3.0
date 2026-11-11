@@ -1,0 +1,39 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{TestTranslation (Go)}
+\ArrowheadType{System Description}
+\ArrowheadTypeShort{SysD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-24}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{TestTranslation}
+\subsection{System overview}
+TestTranslation demonstrates and tests translation bridges of the TranslationManager. It is an interface translator and a data model translator in one native Go executable (\path{ah5-support-go}, role \texttt{TestTranslation}):
+\begin{itemize}
+\item Interface translator: the TranslationManager asks it which targets it can reach (\texttt{check-targets}) and has it create bridges (\texttt{initialize-bridge}) and remove them (\texttt{abort-bridge}). A bridge forwards the consumer's calls of one operation to the target, translates payloads with data model translators and reports usage to the TranslationManager (\texttt{translationReport}).
+\item Data model translator: translates between \texttt{simpleJson} (\texttt{[\{name, value|stringValue|boolValue, unit, time\}]}) and \texttt{senml} (RFC 8428 records; base name, time and unit resolved).
+\end{itemize}
+\subsection{Produced and consumed services}
+Produced: \path{interfaceBridgeManagement} (metadata \texttt{interfaceBridge: \{from: [generic\_https], to: generic\_https\}}), \path{dataModelTranslation} (metadata \texttt{dataModelIds: [[simpleJson, senml], [senml, simpleJson]]}), \path{echo}, \path{generalManagement}, and native \texttt{sysMonitor} telemetry. Each bridge is offered to its consumer with policy \texttt{TRANSLATION\_BRIDGE\_TOKEN\_AUTH}; bridges are not registered services.
+Consumed: the bridge targets (any system of the local cloud), data model translators (its own \path{dataModelTranslation}), the TranslationManager's \path{translationReport}, and the ServiceRegistry, Authentication and ConsumerAuthorization authorities.
+\subsection{Important delimitations}
+TestTranslation is a test application system for the TranslationManager, not a production translator.
+\begin{itemize}
+\item One bridge kind: \texttt{generic\_https} to \texttt{generic\_https}, one negotiated operation per bridge; targets with \texttt{CERT\_AUTH} or \texttt{NONE} policies (authorization tokens for token-protected targets are not presented).
+\item Data models \texttt{simpleJson} and \texttt{senml} only; translations are synchronous (a task is \texttt{DONE} or \texttt{ERROR} when \texttt{init-translation} returns).
+\item Bridges are kept in the system's JSON state; translation tasks only in memory (latest 1000).
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS with local-cloud system certificates. The management services require an identity token bound to the client certificate and a ConsumerAuthorization grant (TranslationManager for \path{interfaceBridgeManagement}, the interface translator for \path{dataModelTranslation}). A bridge requires a local-cloud certificate and \texttt{Authorization: Bearer TRANSLATION-BRIDGE-TOKEN//<bridgeId>}; only the negotiated method and path template are forwarded. Bridge targets and data model translators are called with TestTranslation's identity; their certificates are verified against the cloud CA, the \texttt{sy} profile, the cloud name and the host name (the Java bridge payloads carry no provider name to pin).
+\section{References}
+Contracts: Java \path{TranslationManager} drivers (\path{InterfaceTranslatorDriver}, \path{DataModelTranslatorFactoryDriver}) and the common DTOs \path{TranslationCheckTargetsRequestDTO}, \path{TranslationBridgeInitializationRequestDTO}, \path{DataModelTranslationInitRequestDTO}, \path{DataModelTranslationResultResponseDTO}. Source: \path{internal/core/testtranslation.go}; test: \path{scripts/smoke-translation.sh} of Arrowhead-test-cloud-go.
+\end{document}

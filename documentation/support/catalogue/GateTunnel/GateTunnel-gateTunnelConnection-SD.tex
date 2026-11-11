@@ -1,0 +1,35 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{gateTunnelConnection (Go)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service overview}
+Definition: \path{gateTunnelConnection}, version 5.2.2. Produced by \texttt{GateTunnel}; HTTPS uses \texttt{generic\_https} and \texttt{CERT\_AUTH}. Consumption authorization and management restrictions are additionally enforced at the application layer. Base path: \path{/gatetunnel}.
+\section{Operations}
+\begin{description}
+\item[close-sessions] \texttt{POST} \path{/close_sessions}.
+\item[connect-consumer] \texttt{POST} \path{/connect_consumer}.
+\item[connect-provider] \texttt{POST} \path{/connect_provider}.
+\item[open-consumer-session] \texttt{POST} \path{/intercloud/consumer}.
+\item[open-provider-session] \texttt{POST} \path{/intercloud/provider}.
+\end{description}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Legacy-mTLS relay sessions are supported; control-session records are not a second AMQP tunnel data plane. AH-GT-1 encrypted requests are rejected. Consumer listeners are volatile and renegotiated after restart.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\section{Interface contract}
+See the system HTTPS IDD and the Java source inventory for DTO fields and reference traceability. Successful local tests do not establish all Java behavioral or failure semantics.\end{document}

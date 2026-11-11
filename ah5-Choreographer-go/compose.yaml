@@ -1,0 +1,25 @@
+# Standalone service template; join the target cloud network via ARROWHEAD_NETWORK.
+services:
+  system:
+    image: eclipse-arrowhead/choreographer-go:5.2.2
+    build:
+      context: .
+    user: "${ARROWHEAD_UID:?Run make prepare}:${ARROWHEAD_GID:?Run make prepare}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: [/tmp]
+    ports:
+      - "127.0.0.1:${HOST_PORT:-8457}:8457"
+    volumes:
+      - ./config:/config:ro
+      - ./certs:/certs:ro
+      - ./secrets:/secrets:ro
+      - ./state:/state
+    networks:
+      arrowhead:
+        aliases: [choreographer]
+networks:
+  arrowhead:
+    external: true
+    name: ${ARROWHEAD_NETWORK:?Set the existing target cloud network}

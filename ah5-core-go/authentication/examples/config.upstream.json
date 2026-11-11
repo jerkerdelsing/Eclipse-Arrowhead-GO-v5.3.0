@@ -1,0 +1,18 @@
+{
+  "name": "Authentication",
+  "listen": "127.0.0.1:15445",
+  "cloudSuffix": "GoCloud.Arrowhead.arrowhead.eu",
+  "certificate": "certs/authentication.pem",
+  "privateKey": "certs/authentication.key",
+  "ca": "certs/trust-ca.pem",
+  "state": "state/authentication.json",
+  "bootstrapName": "Sysop",
+  "bootstrapPasswordFile": "secrets/bootstrap-password",
+  "passwordFile": "secrets/authentication-password",
+  "authenticationURL": "https://127.0.0.1:15445",
+  "serviceRegistryURL": "https://127.0.0.1:15441",
+  "identityTTLSeconds": 3600,
+  "register": false,
+  "advertiseAddress": "127.0.0.1",
+  "advertisePort": 15445
+}

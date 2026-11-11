@@ -1,0 +1,61 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{Choreographer (Go)}
+\ArrowheadType{System Design Description}
+\ArrowheadTypeShort{SysDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Choreographer}
+\subsection{System overview}
+Plan, executor and dependency-ordered session management. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{choreographerExecutor}, \allowbreak \path{choreographerManagement}, \allowbreak \path{choreographerSession}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Local synchronous orchestration and executor start/callback flow are implemented. Async orchestration callbacks return 501. Java executor dependency negotiation, optimal selection, session notifications and remote abort propagation are incomplete.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\section{Implementation}
+Go 1.26 or newer builds the native binary. State is serialized as private JSON documents; updates clone state, validate, persist and then publish. Server timeouts and bounded message sizes constrain resource use. Persistent outboxes are at-least-once and cannot provide distributed exactly-once delivery. Detailed source, configuration and test instructions are in the repository README and verification report.
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/choreographer/mgmt/plans} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/sessions} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/session-steps} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/worklog} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/executors} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/plans/{id}} & management\\
+\texttt{DELETE} & \path{/choreographer/mgmt/plans/{id}} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/executors/{id}} & management\\
+\texttt{DELETE} & \path{/choreographer/mgmt/executors/{id}} & management\\
+\texttt{POST} & \path{/choreographer/mgmt/plans} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/plans/{id}/check} & management\\
+\texttt{POST} & \path{/choreographer/mgmt/executors} & management\\
+\texttt{POST} & \path{/choreographer/executor/register} & identity\\
+\texttt{DELETE} & \path{/choreographer/executor/unregister} & identity\\
+\texttt{POST} & \path{/choreographer/session/start} & identity\\
+\texttt{POST} & \path{/choreographer/mgmt/sessions/start} & management\\
+\texttt{DELETE} & \path{/choreographer/session/abort/{id}} & identity\\
+\texttt{DELETE} & \path{/choreographer/mgmt/sessions/{id}} & management\\
+\texttt{POST} & \path{/choreographer/executor/notify-step-done} & identity\\
+\texttt{POST} & \path{/choreographer/orchestration-result/{correlationId}} & identity\\
+\texttt{GET} & \path{/choreographer/monitor/echo} & certificate\\
+\texttt{GET} & \path{/choreographer/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/choreographer/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\end{document}

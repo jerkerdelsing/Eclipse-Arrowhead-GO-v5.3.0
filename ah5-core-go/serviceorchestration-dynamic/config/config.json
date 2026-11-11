@@ -1,0 +1,16 @@
+{
+  "name": "ServiceOrchestration",
+  "listen": "0.0.0.0:8441",
+  "cloudSuffix": "GoCloud.Arrowhead.arrowhead.eu",
+  "certificate": "/certs/system.pem",
+  "privateKey": "/certs/system.key",
+  "ca": "/certs/trust.pem",
+  "state": "/state/serviceorchestration-dynamic.json",
+  "passwordFile": "/secrets/password",
+  "authenticationURL": "https://authentication:8444",
+  "serviceRegistryURL": "https://serviceregistry:8443",
+  "authorizationURL": "https://consumerauthorization:8445",
+  "register": false,
+  "advertiseAddress": "127.0.0.1",
+  "advertisePort": 8441
+}

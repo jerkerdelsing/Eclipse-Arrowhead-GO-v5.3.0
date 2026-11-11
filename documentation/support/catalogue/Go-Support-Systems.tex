@@ -1,0 +1,500 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{Go support systems}
+\ArrowheadType{System Design and Interface Catalogue}
+\ArrowheadTypeShort{SysDD / IDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\begin{center}\vspace*{8mm}{\LARGE Arrowhead support systems in Go}\par\vspace{4mm}{\large Native implementation and interface catalogue}\end{center}
+\begin{abstract}This catalogue covers the fifteen active support systems in the local Java reference, including AIGym as a local extension. It records the delivered Go design, service interfaces, security boundaries and explicit remaining work. It is a development document; it does not assert full Java interchangeability or that any running cloud has changed.\end{abstract}
+\ArrowheadBox{Release boundary.}{Do not replace a Java deployment solely because an HTTP route exists. Review each system's delimitations and the verification report; required advanced integrations and data migrations remain release gates.}
+\newpage\tableofcontents\newpage
+\section{AIGym}
+\subsection{System overview}
+Local extension: nearest-neighbour model training and inference. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{aiGym}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Local extension, not an upstream mandatory Arrowhead 5.2.2 support system. Native k-nearest-neighbour behavior and persisted samples are implemented; all Java observation publishing semantics are not ported.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/health} & certificate\\
+\texttt{POST} & \path{/aigym/samples} & identity\\
+\texttt{POST} & \path{/aigym/predict} & identity\\
+\texttt{GET} & \path{/aigym/observations} & identity\\
+\texttt{GET} & \path{/aigym/status} & identity\\
+\texttt{GET} & \path{/aigym/monitor/echo} & certificate\\
+\texttt{GET} & \path{/aigym/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/aigym/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Blacklist}
+\subsection{System overview}
+Time-bounded system exclusion and discovery. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{blacklistDiscovery}, \allowbreak \path{blacklistManagement}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Time-bounded active/revoked records persist in JSON. Complete Java normalization, historical reactivation and query mode edge cases need golden-contract tests.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/blacklist/check/{systemName}} & identity\\
+\texttt{GET} & \path{/blacklist/lookup} & identity\\
+\texttt{POST} & \path{/blacklist/mgmt/create} & management\\
+\texttt{DELETE} & \path{/blacklist/mgmt/remove} & management\\
+\texttt{POST} & \path{/blacklist/mgmt/query} & management\\
+\texttt{GET} & \path{/blacklist/monitor/echo} & certificate\\
+\texttt{GET} & \path{/blacklist/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/blacklist/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{CertificateAuthority}
+\subsection{System overview}
+Profile-constrained CSR issuance, revocation and trusted keys. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{certificateAuthorityManagement}, \allowbreak \path{certificateSigning}, \allowbreak \path{certificateValidation}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item CSR and CRL operations use a separately provisioned CA key; no CA key is generated/copied by this port. CRL export does not prove enforcement by every relying party. Java SQL import, automatic CRL file publication, HSM/OCSP/HA are absent.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/certificate-authority/sign} & identity\\
+\texttt{POST} & \path{/certificate-authority/checkCertificate} & identity\\
+\texttt{GET} & \path{/certificate-authority/crl} & identity\\
+\texttt{GET} & \path{/certificate-authority/mgmt/certificates} & management\\
+\texttt{DELETE} & \path{/certificate-authority/mgmt/certificates/{id}} & identity\\
+\texttt{GET} & \path{/certificate-authority/mgmt/keys} & management\\
+\texttt{DELETE} & \path{/certificate-authority/mgmt/keys/{id}} & identity\\
+\texttt{POST} & \path{/certificate-authority/mgmt/revocations} & management\\
+\texttt{PUT} & \path{/certificate-authority/mgmt/keys} & management\\
+\texttt{POST} & \path{/certificate-authority/checkTrustedKey} & identity\\
+\texttt{GET} & \path{/certificate-authority/monitor/echo} & certificate\\
+\texttt{GET} & \path{/certificate-authority/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/certificate-authority/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Choreographer}
+\subsection{System overview}
+Plan, executor and dependency-ordered session management. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{choreographerExecutor}, \allowbreak \path{choreographerManagement}, \allowbreak \path{choreographerSession}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Local synchronous orchestration and executor start/callback flow are implemented. Async orchestration callbacks return 501. Java executor dependency negotiation, optimal selection, session notifications and remote abort propagation are incomplete.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/choreographer/mgmt/plans} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/sessions} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/session-steps} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/worklog} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/executors} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/plans/{id}} & management\\
+\texttt{DELETE} & \path{/choreographer/mgmt/plans/{id}} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/executors/{id}} & management\\
+\texttt{DELETE} & \path{/choreographer/mgmt/executors/{id}} & management\\
+\texttt{POST} & \path{/choreographer/mgmt/plans} & management\\
+\texttt{GET} & \path{/choreographer/mgmt/plans/{id}/check} & management\\
+\texttt{POST} & \path{/choreographer/mgmt/executors} & management\\
+\texttt{POST} & \path{/choreographer/executor/register} & identity\\
+\texttt{DELETE} & \path{/choreographer/executor/unregister} & identity\\
+\texttt{POST} & \path{/choreographer/session/start} & identity\\
+\texttt{POST} & \path{/choreographer/mgmt/sessions/start} & management\\
+\texttt{DELETE} & \path{/choreographer/session/abort/{id}} & identity\\
+\texttt{DELETE} & \path{/choreographer/mgmt/sessions/{id}} & management\\
+\texttt{POST} & \path{/choreographer/executor/notify-step-done} & identity\\
+\texttt{POST} & \path{/choreographer/orchestration-result/{correlationId}} & identity\\
+\texttt{GET} & \path{/choreographer/monitor/echo} & certificate\\
+\texttt{GET} & \path{/choreographer/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/choreographer/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Configuration}
+\subsection{System overview}
+Versioned configuration storage and retrieval. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{configuration}, \allowbreak \path{configurationManagement}, \allowbreak \path{configurationProxy}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item JSON persistence replaces JPA/SQL. Proxy currently serves the local configuration store instead of Java external-provider fallback.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/configuration/config/{systemName}} & identity\\
+\texttt{GET} & \path{/configuration/proxy/config/{systemName}} & identity\\
+\texttt{GET} & \path{/configuration/config/raw/{systemName}} & identity\\
+\texttt{PUT} & \path{/configuration/mgmt/config/{systemName}} & management\\
+\texttt{PUT} & \path{/configuration/proxy/save-config} & identity\\
+\texttt{GET} & \path{/configuration/mgmt/config} & management\\
+\texttt{DELETE} & \path{/configuration/mgmt/config/{systemName}} & management\\
+\texttt{GET} & \path{/configuration/monitor/echo} & certificate\\
+\texttt{GET} & \path{/configuration/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/configuration/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{DataManager}
+\subsection{System overview}
+SenML historian and authorized provider data proxy. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{dataHistorian}, \allowbreak \path{dataProxy}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Historian packs are persisted locally. Proxy resolves registered HTTPS get-data/put-data operations and uses its own identity. Complete SenML normalization, signalCount semantics, Java provider-configuration and MQTT ingestion are not ported.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/datamanager/data-historian/systems} & identity\\
+\texttt{GET} & \path{/datamanager/data-historian/systems/{systemName}/services} & identity\\
+\texttt{GET} & \path{/datamanager/data-historian/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{PUT} & \path{/datamanager/data-historian/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems/{systemName}/services} & identity\\
+\texttt{GET} & \path{/datamanager/data-proxy/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{PUT} & \path{/datamanager/data-proxy/systems/{systemName}/services/{serviceName}/data} & identity\\
+\texttt{GET} & \path{/datamanager/monitor/echo} & certificate\\
+\texttt{GET} & \path{/datamanager/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/datamanager/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{DeviceQoSEvaluator}
+\subsection{System overview}
+Device measurement filtering and ranking. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{deviceQualityDataManagement}, \allowbreak \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{qualityEvaluation}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Uses explicit DeviceMeasurementAgent input. The complete Java SNMP/OID discovery, augmentation and scaling engine is not ported; scores are weighted window means with missing-data rejection.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/deviceqosevaluator/qualityevaluation/filter} & identity\\
+\texttt{POST} & \path{/deviceqosevaluator/qualityevaluation/sort} & identity\\
+\texttt{POST} & \path{/deviceqosevaluator/mgmt/query} & management\\
+\texttt{POST} & \path{/deviceqosevaluator/mgmt/reload} & management\\
+\texttt{GET} & \path{/deviceqosevaluator/monitor/echo} & certificate\\
+\texttt{GET} & \path{/deviceqosevaluator/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/deviceqosevaluator/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{EventHandler}
+\subsection{System overview}
+Authorized subscriptions and event delivery. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{eventHandlerManagement}, \allowbreak \path{eventPublish}, \allowbreak \path{eventSubscription}, \allowbreak \path{generalManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item HTTPS callbacks use a persistent bounded outbox and at most three attempts. MQTT notifications, complete Java executor/backoff settings and distributed exactly-once guarantees are absent.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/eventhandler/event-subscription/subscribe} & identity\\
+\texttt{DELETE} & \path{/eventhandler/event-subscription/unsubscribe/{subscriptionId}} & identity\\
+\texttt{GET} & \path{/eventhandler/management/subscriptions} & management\\
+\texttt{PUT} & \path{/eventhandler/management/subscriptions/{subscriptionId}} & management\\
+\texttt{DELETE} & \path{/eventhandler/management/subscriptions/{subscriptionId}} & management\\
+\texttt{POST} & \path{/eventhandler/event-publish/publish} & identity\\
+\texttt{GET} & \path{/eventhandler/monitor/echo} & certificate\\
+\texttt{GET} & \path{/eventhandler/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/eventhandler/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{GateTunnel}
+\subsection{System overview}
+Authorized legacy-mTLS relay and tunnel sessions. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{gateTunnelConnection}, \allowbreak \path{gateTunnelKey}, \allowbreak \path{gateTunnelManagement}, \allowbreak \path{generalManagement}.
+HTTPS service version 5.2.2. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Legacy-mTLS relay sessions are supported; control-session records are not a second AMQP tunnel data plane. AH-GT-1 encrypted requests are rejected. Consumer listeners are volatile and renegotiated after restart.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/gatetunnel/echo} & identity\\
+\texttt{GET} & \path{/gatetunnel/publickey} & identity\\
+\texttt{POST} & \path{/gatetunnel/connect_provider} & identity\\
+\texttt{POST} & \path{/gatetunnel/connect_consumer} & identity\\
+\texttt{POST} & \path{/gatetunnel/close_sessions} & identity\\
+\texttt{GET} & \path{/gatetunnel/mgmt/sessions} & management\\
+\texttt{POST} & \path{/gatetunnel/mgmt/sessions/close} & management\\
+\texttt{POST} & \path{/gatetunnel/intercloud/provider} & identity\\
+\texttt{POST} & \path{/gatetunnel/intercloud/consumer} & identity\\
+\texttt{GET} & \path{/gatetunnel/mgmt/status} & management\\
+\texttt{GET} & \path{/gatetunnel/monitor/echo} & certificate\\
+\texttt{GET} & \path{/gatetunnel/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/gatetunnel/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Gatekeeper}
+\subsection{System overview}
+Cross-cloud discovery and negotiation. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{gatekeeperManagement}, \allowbreak \path{generalManagement}, \allowbreak \path{globalServiceDiscovery}, \allowbreak \path{interCloudNegotiation}.
+HTTPS service version 5.2.2. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Reuses the existing native Go legacy-mTLS relay engine, adapted to pinned clients. AH-GT-1 end-to-end encryption is absent. Broker ACLs and trusted neighbour provisioning remain required; no live federation is exercised by this delivery.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/gatekeeper/echo} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_gsd} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_multi_gsd} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_icn} & identity\\
+\texttt{GET} & \path{/gatekeeper/mgmt/clouds} & management\\
+\texttt{POST} & \path{/gatekeeper/mgmt/clouds} & management\\
+\texttt{DELETE} & \path{/gatekeeper/mgmt/clouds/{operator}/{name}} & management\\
+\texttt{GET} & \path{/gatekeeper/mgmt/relays} & management\\
+\texttt{POST} & \path{/gatekeeper/mgmt/relays} & management\\
+\texttt{GET} & \path{/gatekeeper/mgmt/status} & management\\
+\texttt{GET} & \path{/gatekeeper/monitor/echo} & certificate\\
+\texttt{GET} & \path{/gatekeeper/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/gatekeeper/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Onboarding}
+\subsection{System overview}
+Controlled certificate, device and system onboarding. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{onboarding}, \allowbreak \path{onboardingManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Enrollment records use JSON, not the Java database. System/identity/registry operations form a partial compensating saga, not a distributed transaction. Complete renewal, crash recovery, withdrawal of approved systems and prerequisite-service discovery require further work.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/onboarding/echo} & certificate\\
+\texttt{GET} & \path{/onboarding/mgmt/enrollments} & management\\
+\texttt{GET} & \path{/onboarding/mgmt/enrollments/{deviceName}} & management\\
+\texttt{PUT} & \path{/onboarding/mgmt/enrollments/{deviceName}} & management\\
+\texttt{POST} & \path{/onboarding/certificate/name} & enrollment\\
+\texttt{POST} & \path{/onboarding/certificate/csr} & enrollment\\
+\texttt{POST} & \path{/onboarding/device} & enrollment\\
+\texttt{POST} & \path{/onboarding/system} & enrollment\\
+\texttt{POST} & \path{/onboarding/device/offboard} & enrollment\\
+\texttt{POST} & \path{/onboarding/mgmt/enrollments/{deviceName}/offboard} & management\\
+\texttt{DELETE} & \path{/onboarding/mgmt/enrollments/{deviceName}} & management\\
+\texttt{GET} & \path{/onboarding/monitor/echo} & certificate\\
+\texttt{GET} & \path{/onboarding/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/onboarding/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{PlantDescriptionEngine}
+\subsection{System overview}
+Plant topology and monitored alarm state. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{plantDescriptionManagement}, \allowbreak \path{plantDescriptionMonitor}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Topology/include composition, named and metadata matching, periodic alarms, and atomic PDE-to-DSO snapshot synchronization are implemented. Missing producers retain managed empty scopes; nonnegative priorities rank eligible providers. Java SQL import, complete DTO normalization and production qualification remain outside this extension.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/plantdescriptionengine/mgmt/sync-status} & management\\
+\texttt{GET} & \path{/plantdescriptionengine/mgmt/plant-descriptions} & management\\
+\texttt{GET} & \path{/plantdescriptionengine/mgmt/plant-descriptions/{id}} & management\\
+\texttt{POST} & \path{/plantdescriptionengine/mgmt/plant-descriptions} & management\\
+\texttt{PUT} & \path{/plantdescriptionengine/mgmt/plant-descriptions/{id}} & management\\
+\texttt{PATCH} & \path{/plantdescriptionengine/mgmt/plant-descriptions/{id}} & management\\
+\texttt{DELETE} & \path{/plantdescriptionengine/mgmt/plant-descriptions/{id}} & management\\
+\texttt{GET} & \path{/plantdescriptionengine/monitor/plant-descriptions} & identity\\
+\texttt{GET} & \path{/plantdescriptionengine/monitor/plant-descriptions/{id}} & identity\\
+\texttt{GET} & \path{/plantdescriptionengine/monitor/alarms} & identity\\
+\texttt{GET} & \path{/plantdescriptionengine/monitor/alarms/{id}} & identity\\
+\texttt{PATCH} & \path{/plantdescriptionengine/monitor/alarms/{id}} & identity\\
+\texttt{GET} & \path{/plantdescriptionengine/monitor/echo} & certificate\\
+\texttt{GET} & \path{/plantdescriptionengine/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/plantdescriptionengine/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{SysMonitor}
+\subsection{System overview}
+Monitoring subscriptions, history and durable observation forwarding. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{sysMonitorHistory}, \allowbreak \path{sysMonitorManagement}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item AMQPS intake and MQTT QoS1 outbox forwarding are implemented. MQTT uses Paho 3.1.1 rather than Java MQTTv5. Full live-broker/UI parity and imported Java history have not been certified. The default subscription is none until configured.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/sysmonitor/management/status} & management\\
+\texttt{GET} & \path{/sysmonitor/management/providers} & management\\
+\texttt{GET} & \path{/sysmonitor/management/subscriptions} & management\\
+\texttt{PUT} & \path{/sysmonitor/management/subscriptions/{providerSystem}} & management\\
+\texttt{DELETE} & \path{/sysmonitor/management/subscriptions/{providerSystem}} & management\\
+\texttt{POST} & \path{/sysmonitor/management/reconcile} & management\\
+\texttt{GET} & \path{/sysmonitor/history/systems} & identity\\
+\texttt{GET} & \path{/sysmonitor/history/systems/{systemName}/latest} & identity\\
+\texttt{GET} & \path{/sysmonitor/history/systems/{systemName}/observations} & identity\\
+\texttt{GET} & \path{/sysmonitor/monitor/echo} & certificate\\
+\texttt{GET} & \path{/sysmonitor/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/sysmonitor/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{TimeManager}
+\subsection{System overview}
+UTC reference time. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{time}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item SNTP checks report offset/trust without changing the host clock. Full Java time-source caching, source-selection and trust policy are not ported.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/timemanager/time} & identity\\
+\texttt{GET} & \path{/timemanager/monitor/echo} & certificate\\
+\texttt{GET} & \path{/timemanager/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/timemanager/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{TranslationManager}
+\subsection{System overview}
+Bridge discovery, negotiation and lifecycle. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{generalManagement}, \allowbreak \path{translationBridge}, \allowbreak \path{translationBridgeManagement}, \allowbreak \path{translationReport}.
+HTTPS service version 1.0.0. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Port of the Java TranslatorBridgeEngine (2026-10-24): interface translators (interfaceBridgeManagement) and data model translators (dataModelTranslation, or dataModelTranslatorFactoryControl factories) are discovered in the ServiceRegistry by their metadata; check-targets, initialize-bridge and abort-bridge follow the Java driver contracts; bridge statuses, transitions, reports and the 8-hour discovery cleanup are the Java ones.
+\item Translators are called over mutual TLS with the identity token; translators whose interfaceBridgeManagement interface uses a TOKEN\_AUTH policy are not selected, and custom translator configuration (a TODO in the Java reference) is not sent.
+\item Default matchmaking takes the first acceptable translator; the Java matchmaker beans are not pluggable.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\clearpage
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/translation/bridge/discovery} & identity\\
+\texttt{POST} & \path{/translation/bridge/mgmt/discovery} & management\\
+\texttt{POST} & \path{/translation/bridge/negotiation} & identity\\
+\texttt{POST} & \path{/translation/bridge/mgmt/negotiation} & management\\
+\texttt{DELETE} & \path{/translation/bridge/abort/{bridgeId}} & identity\\
+\texttt{DELETE} & \path{/translation/bridge/mgmt/abort} & management\\
+\texttt{POST} & \path{/translation/bridge/mgmt/query} & management\\
+\texttt{POST} & \path{/translation/event/report} & identity\\
+\texttt{GET} & \path{/translation/monitor/echo} & certificate\\
+\texttt{GET} & \path{/translation/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/translation/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Verification and release gates}
+Build and static checks must cover all fifteen executables. Race-checked tests use isolated PKI and temporary state. Java-versus-Go golden contracts, real broker interoperability, database import and rollback, federation peers and LocalCloudManager readiness require separate evidence. No generated document labels these implementations production-ready.\end{document}

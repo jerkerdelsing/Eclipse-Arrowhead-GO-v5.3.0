@@ -1,0 +1,41 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl,enumitem}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{nosep,leftmargin=*}
+\begin{document}
+\ArrowheadTitle{LocalCloudManager / SysD (Go)}\ArrowheadType{System Description}\ArrowheadTypeShort{Go}
+\ArrowheadVersion{5.2.2}\ArrowheadDate{2026-10-17}
+\ArrowheadAuthor{Eclipse Arrowhead migration project}\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Project maintainers}\ArrowheadFooter{Eclipse Arrowhead -- Go LocalCloudManager -- EPL-2.0}
+\ArrowheadSetup
+\section{System overview}
+LocalCloudManager is the operator-facing Go adapter for an Arrowhead local cloud. This package relocates the latest located local source into \path|ah5-support-go/LocalCloudManager|, with a dedicated launcher, bundled shared-runtime dependencies and embedded dashboard assets. The target system version is 5.2.2; produced service versions are 1.0.0. This relocation does not establish complete Java interchangeability or modify a deployed cloud.
+\section{System boundary and stakeholders}
+An operator browser uses the console UI and localCloudManagement API. The adapter consumes ServiceRegistry, Authentication, Simple Store Service Orchestration, DataManager, SysMonitor and PlantDescriptionEngine. It reads Docker container metadata/logs and performs limited lifecycle actions through a Unix socket. Native Go business code does not invoke a Java, Rust or Node.js server.
+\section{Produced services}
+\path|localCloudManagement| at \path|/api| is the browser-facing session API. Historical \path|monitor| at \path|/localcloud/monitor| provides echo and retains the source's legacy registration name. Optional \path|sysMonitor| is native AMQPS telemetry and is enabled only in secure mode with \path|SYSMONITOR_ENABLED=true|. Legacy monitor naming is not a recommendation for new telemetry contracts.
+\section{Consumed services and prerequisites}
+Provision a distinct LocalCloudManager sy certificate, matching private key, trusted CA bundle, Authentication identity/password, and provider grants/management whitelist. Configure explicit HTTPS URLs for every used provider: several inherited defaults are HTTP and fail in secure mode. Docker access requires the intended Compose project and isolated socket access. No CA private key is needed or included.
+\section{Deployment and variants}
+Exactly one manager implementation should serve a cloud. The revised SysML model records Go's canonical source, the existing Java-cloud Node.js adapter, and the Rust source as distinct variants; it does not assert tested substitution. Default standalone port8480 uses mutual TLS and serves UI/API on the same listener. Historical API9480/UI9490 mappings belong to deployment configuration, not this relocation. Existing native-go deployment source is retained unchanged to preserve shared-runtime build contexts.
+\section{Compatibility and release gates}
+This relocation intentionally preserves the latest located manager's business behavior. New changes are packaging (standalone nested module/role-specific launcher), embedded UI fallback, documentation and tests. This is not a security remediation or full Java-equivalence implementation.\par\medskip
+1. \path|PUT/DELETE /api/sysmonitor/subscriptions/{providerSystem}| currently checks confirmation and returns updated/removed flags without forwarding a write. Do not interpret this as applied configuration. This remains a release blocker.\par\medskip
+2. \path|/api/intercloud| returns a static unavailable/no-relay summary. It does not inspect Gatekeeper/GateTunnel. Consumer cloud labels include hard-coded TestCloud strings; no live foreign authorization catalogue is queried.\par\medskip
+3. Overview hard-codes registration/naming flags and leaves several collections empty. Subscription status hard-codes intake.connected=true/providerFound=false. These are display adapters, not authoritative readiness or security evidence.\par\medskip
+4. Historian, SysMonitor, plant and orchestration adapters target the inherited Go-cloud routes/shapes. They are not proven compatible with the newer generic Go support port or latest Java APIs. The standalone module must be qualified against the providers actually deployed.\par\medskip
+5. Console Host/Origin checks compare host names, not exact origins/ports. The \path|ah_console| cookie is not port-isolated and lacks Secure. Sessions/history are in-memory and reset on restart. Missing password disables APIs. Login lockout is global, five failures in five minutes then one-minute lockout; this is not comprehensive abuse protection.\par\medskip
+6. The manager API is dispatched before the shared application's token/management checks. Its boundary is console password/session plus the transport's mTLS if enabled, not a bearer-token-only API. Static assets and health have no console session requirement. A proxy must preserve this intended boundary.\par\medskip
+7. Authentication has explicit CN/profile pinning. Other provider clients use CA/SAN validation but do not generally pin expected provider CN. Do not claim universal authority-substitution resistance for this inherited code. Redirects are disabled. Optional CRLs reload for new connections only; omitted CRLs mean no revocation enforcement.\par\medskip
+8. Lifecycle uses the static systemToCompose service allowlist and Compose-project filtered container list; MANAGED\_SERVICES is not consumed by this implementation. Action is start/stop/restart only. Logs, however, can read any returned project container, not just the lifecycle allowlist. The raw Docker socket still confers broad daemon privilege: application checks are not a least-privilege socket boundary. Production needs a constrained proxy and deployment review.\par\medskip
+9. Shared runtime source includes other roles for compile-time dependencies and inherited tests. The dedicated executable refuses selecting those roles; they are not a second support-system deployment. No Docker socket or live state is needed by tests.\par\medskip
+10. Telemetry AMQP publisher has no durable local outbox; retries/reconnects do not establish exactly-once delivery. power=line/available and process health are generated status, not measurements of physical hardware. Registration is retried every20seconds; displayed registration flags are not confirmation. No real broker test is claimed here.\par\medskip
+11. Shared state is the inherited JSON format, not the newer support port's transactional state model. There is no new Java SQL migration, encryption-at-rest or multi-process ownership guarantee. Keep independent state and backups.\par\medskip
+12. Historical Markdown/SysML claims of three-way interchangeability are retained only under docs/legacy. The revised model and new SysD/SysDD/SD/IDD set distinguish intended common contracts from actual Go qualification.\par\medskip
+13. The shared serviceOperations helper generates POST/name metadata for localCloudManagement and the legacy monitor service, whereas actual handlers include GET/PUT/PATCH/DELETE and nested paths. Registration metadata is therefore not an authoritative HTTP contract. The new IDDs document actual handler methods/paths; correcting advertised metadata is separate functional work, not silently folded into relocation.\par\medskip
+Source relocation does not modify running containers or remove their deployment source. Before switching deployment build paths, close these gaps, qualify provider DTOs/policies, review Docker access, isolate browser trust domains, and test rollback.\par\medskip
+\section{References and verification}
+Authoritative moved code: LocalCloudManager/internal/cloud and embedded ui sources. Exact original/relocated SHA256 hashes are in docs/source-manifest.json. docs/legacy preserves the earlier local Markdown/SysML, not an endorsement of its parity claims. The revised SysML variability model is descriptive and has not been checked by a SysML parser. Executed checks and qualification limits are recorded in VERIFICATION.md. Source movement does not deploy or alter running clouds.
+\end{document}

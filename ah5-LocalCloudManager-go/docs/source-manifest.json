@@ -1,0 +1,218 @@
+{
+  "actualHTTPRoutes": [
+    {
+      "Method": "GET",
+      "Path": "/health",
+      "Access": "transport",
+      "Behavior": "Runtime configuration, not readiness proof"
+    },
+    {
+      "Method": "GET",
+      "Path": "/ and /ui",
+      "Access": "transport",
+      "Behavior": "Static embedded index"
+    },
+    {
+      "Method": "GET",
+      "Path": "/app.js and /assets/app.js",
+      "Access": "transport",
+      "Behavior": "Embedded JavaScript"
+    },
+    {
+      "Method": "GET",
+      "Path": "/styles.css and /assets/styles.css",
+      "Access": "transport",
+      "Behavior": "Embedded CSS"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/session",
+      "Access": "console policy",
+      "Behavior": "authenticated/configured booleans"
+    },
+    {
+      "Method": "POST",
+      "Path": "/api/session",
+      "Access": "console policy",
+      "Behavior": "Password login; 204 and cookie"
+    },
+    {
+      "Method": "DELETE",
+      "Path": "/api/session",
+      "Access": "console policy",
+      "Behavior": "Invalidate cookie/session"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/overview",
+      "Access": "session",
+      "Behavior": "Inventory/runtime aggregation; synthetic flags noted"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/service-registry-management",
+      "Access": "session",
+      "Behavior": "Grouped devices/systems/services/runtime"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/datamanager",
+      "Access": "session",
+      "Behavior": "Flatten historian; limit default240, max1000"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/consumers",
+      "Access": "session",
+      "Behavior": "Service and simple-store consumer view"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/intercloud",
+      "Access": "session",
+      "Behavior": "Static unavailable placeholder"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/sysmonitor",
+      "Access": "session",
+      "Behavior": "Inherited observation adapter; optional system query"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/sysmonitor/subscriptions",
+      "Access": "session",
+      "Behavior": "Read subscription adapter; synthetic intake flags"
+    },
+    {
+      "Method": "PUT, DELETE",
+      "Path": "/api/sysmonitor/subscriptions/{providerSystem}",
+      "Access": "session + confirm",
+      "Behavior": "Acknowledgement only; NO provider write"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/plantdescriptions",
+      "Access": "session",
+      "Behavior": "Plant records and registry catalogue"
+    },
+    {
+      "Method": "POST",
+      "Path": "/api/plantdescriptions",
+      "Access": "session + confirm",
+      "Behavior": "Create through provider adapter"
+    },
+    {
+      "Method": "PUT, PATCH, DELETE",
+      "Path": "/api/plantdescriptions/{id}",
+      "Access": "session + confirm",
+      "Behavior": "Provider replace/update/remove"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/orchestration/rules",
+      "Access": "session",
+      "Behavior": "Simple store plus producer/consumer catalogue"
+    },
+    {
+      "Method": "POST",
+      "Path": "/api/orchestration/rules",
+      "Access": "session + confirm",
+      "Behavior": "Validate consumer/instance/priority then create"
+    },
+    {
+      "Method": "DELETE",
+      "Path": "/api/orchestration/rules/{id}",
+      "Access": "session + confirm",
+      "Behavior": "Remove via simple-store adapter"
+    },
+    {
+      "Method": "GET",
+      "Path": "/api/logs",
+      "Access": "session",
+      "Behavior": "service query; tail default150, max500"
+    },
+    {
+      "Method": "POST",
+      "Path": "/api/containers/{service}/{action}",
+      "Access": "session + confirm",
+      "Behavior": "Static allowlist, project filter; start/stop/restart"
+    },
+    {
+      "Method": "GET",
+      "Path": "/localcloud/management/status",
+      "Access": "Arrowhead management",
+      "Behavior": "Legacy status response"
+    },
+    {
+      "Method": "GET",
+      "Path": "/localcloud/management/systems",
+      "Access": "Arrowhead management",
+      "Behavior": "Registry systems query"
+    },
+    {
+      "Method": "GET",
+      "Path": "/localcloud/management/services",
+      "Access": "Arrowhead management",
+      "Behavior": "Registry instances query"
+    },
+    {
+      "Method": "GET",
+      "Path": "/localcloud/monitor/echo",
+      "Access": "Arrowhead identity",
+      "Behavior": "Text Got it!; registry metadata differs"
+    }
+  ],
+  "notice": "Canonical relocation; deployment copy retained; no live secrets/state copied; registration metadata differs from handlers",
+  "referenceRoot": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/Arrowhead-test-cloud-go/native-go",
+  "referenceSHA256": {
+    "cmd/arrowhead/main.go": "4ebc507d827c5cc8dfc6587ce1c37cd65b32638ba514e843c62466037ec315e7",
+    "go.mod": "c31b05d031db5acd8b4382672a5d0793eb0c30ebd2755bd6ac9b6e19b6d24eea",
+    "go.sum": "a6851abd8436480868ef5bdc2e8fc2391c0d0637851b7ee9baffd454ecddbc02",
+    "internal/cloud/app.go": "cffe1faddd43d5ee3a93d120a719631c4475444beb44a1f38f81205d5845aac1",
+    "internal/cloud/app_test.go": "a73268c704ba7323e30a6a5e681f52dc2d53ed16b998f6c1888ee9fa7a4539ce",
+    "internal/cloud/core.go": "836977d31e2da74f0d98515a3f2094fbdb613c4161c7ec296394037c602fe415",
+    "internal/cloud/federation.go": "8ac44c6ab955c4ee8e86d2eed3e256ffff31ffcd1cfb4d222ca00aa7d9440829",
+    "internal/cloud/federation_test.go": "fdc0e79b2c11ccb2f2d50699144efedd60832645cabcb00d3e5e0158d72a46b8",
+    "internal/cloud/localcloudmanager.go": "9b0b0537c5aa03fcee3f5902f0a3612829c60fe59d3b44e17013d5118331a714",
+    "internal/cloud/model.go": "d4a0e46fdc0c1d7c8baa2d5c4aa73bf129eb8883dd049df2f55bd24ec7f4322f",
+    "internal/cloud/monitoring.go": "79f87ea9a323775e85eff3a551db1accf0d5e8f59e0d4db3a980b07f3539d2f8",
+    "internal/cloud/registry.go": "ab5507ffa0439e12334f472fc21db3075088210e1801628599938a756fb28e9a",
+    "internal/cloud/security.go": "2de764eac1412987243b3cefe8f14f2f47304bb18f3eacf44dc639da4e505f71",
+    "internal/cloud/security_test.go": "321206b4c0d82b7fe234b3a95e5fd6a8e31406d5ed4a7bdff5d9aae049bf0e99",
+    "internal/cloud/support.go": "2f3326e67470fc0aec56e47b93e7a66a857aa2317812656f34f7f8c79e8f0567",
+    "internal/cloud/tunnel_control.go": "516854a8505e97775102f114e822de59accd636248dadbd9e69732a4df10e2ad",
+    "internal/cloud/tunnel_control_test.go": "e5c2299c2b0a17919f2a4967e3d83c683fa08be1df4aa9f371feba82f7e555ca",
+    "internal/cloud/ui.go": "ceef088df89bc03f8feb00daf9a822131d0e8d7f0d6ff7c58eaa481eaf074d25",
+    "internal/cloud/ui/app.js": "3e6620f8f29c9cb2702b8595110587c393e7e8e2b72689db507c25c8019e80d9",
+    "internal/cloud/ui/index.html": "73a4f873c2bc8d229424083f5c88a5d0580bda5bf19b2eac56f294949bdac021",
+    "internal/cloud/ui/styles.css": "1a28c7e8a8262d51805b7c9f75d18f5a57e5dcf90f778f00d774748f0efa2575"
+  },
+  "relocatedSHA256": {
+    "cmd/documentation/main.go": "6c7d79c71950371550921b14f3cb42110e4ca6f5e45625ec9591e44fe3a3503f",
+    "cmd/localcloudmanager/main.go": "bbecac2ac0dc189c682473a92bfcbec4094659b5c608e3929cd778e3d5dde9da",
+    "cmd/localcloudmanager/main_test.go": "12bdb3fe0373f6d19646d16a082b1598693131d3ab38fc1f7cd14ae9509eb49f",
+    "go.mod": "13de6eb55c6bae7ce064b09fdb7ecee1bddc42a36e1b742068d71abd0cb00a1d",
+    "go.sum": "a6851abd8436480868ef5bdc2e8fc2391c0d0637851b7ee9baffd454ecddbc02",
+    "internal/cloud/app.go": "cffe1faddd43d5ee3a93d120a719631c4475444beb44a1f38f81205d5845aac1",
+    "internal/cloud/app_test.go": "a73268c704ba7323e30a6a5e681f52dc2d53ed16b998f6c1888ee9fa7a4539ce",
+    "internal/cloud/assets.go": "f1e037ea35541044cf802be7796cc87166ceae57d386646435e10e80822454ec",
+    "internal/cloud/core.go": "836977d31e2da74f0d98515a3f2094fbdb613c4161c7ec296394037c602fe415",
+    "internal/cloud/federation.go": "8ac44c6ab955c4ee8e86d2eed3e256ffff31ffcd1cfb4d222ca00aa7d9440829",
+    "internal/cloud/federation_test.go": "fdc0e79b2c11ccb2f2d50699144efedd60832645cabcb00d3e5e0158d72a46b8",
+    "internal/cloud/localcloudmanager.go": "bebfc17e80e23ebcebf405b49bc445c021cba978c9f40a3016d7d59931b86669",
+    "internal/cloud/localcloudmanager_relocation_test.go": "1962f675c2893f5aee65bb3d72be8b6612c5fb111ee52f6f2e3f20686286fbae",
+    "internal/cloud/model.go": "d4a0e46fdc0c1d7c8baa2d5c4aa73bf129eb8883dd049df2f55bd24ec7f4322f",
+    "internal/cloud/monitoring.go": "79f87ea9a323775e85eff3a551db1accf0d5e8f59e0d4db3a980b07f3539d2f8",
+    "internal/cloud/registry.go": "ab5507ffa0439e12334f472fc21db3075088210e1801628599938a756fb28e9a",
+    "internal/cloud/security.go": "2de764eac1412987243b3cefe8f14f2f47304bb18f3eacf44dc639da4e505f71",
+    "internal/cloud/security_test.go": "321206b4c0d82b7fe234b3a95e5fd6a8e31406d5ed4a7bdff5d9aae049bf0e99",
+    "internal/cloud/support.go": "2f3326e67470fc0aec56e47b93e7a66a857aa2317812656f34f7f8c79e8f0567",
+    "internal/cloud/tunnel_control.go": "516854a8505e97775102f114e822de59accd636248dadbd9e69732a4df10e2ad",
+    "internal/cloud/tunnel_control_test.go": "e5c2299c2b0a17919f2a4967e3d83c683fa08be1df4aa9f371feba82f7e555ca",
+    "internal/cloud/ui.go": "ceef088df89bc03f8feb00daf9a822131d0e8d7f0d6ff7c58eaa481eaf074d25",
+    "internal/cloud/ui/app.js": "3e6620f8f29c9cb2702b8595110587c393e7e8e2b72689db507c25c8019e80d9",
+    "internal/cloud/ui/index.html": "73a4f873c2bc8d229424083f5c88a5d0580bda5bf19b2eac56f294949bdac021",
+    "internal/cloud/ui/styles.css": "1a28c7e8a8262d51805b7c9f75d18f5a57e5dcf90f778f00d774748f0efa2575"
+  }
+}

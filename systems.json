@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Authentication",
+    "path": "ah5-core-go/authentication",
+    "kind": "core",
+    "module": "arrowhead/ah5-core-go/authentication",
+    "entry": "./cmd/authentication",
+    "port": 8444,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-core-go/authentication",
+    "configType": "json"
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "path": "ah5-core-go/consumer-authorization",
+    "kind": "core",
+    "module": "arrowhead/ah5-core-go/consumer-authorization",
+    "entry": "./cmd/consumer-authorization",
+    "port": 8445,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-core-go/consumer-authorization",
+    "configType": "json"
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-dynamic",
+    "kind": "core",
+    "module": "arrowhead/ah5-core-go/serviceorchestration-dynamic",
+    "entry": "./cmd/serviceorchestration-dynamic",
+    "port": 8441,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-core-go/serviceorchestration-dynamic",
+    "configType": "json"
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-simple",
+    "kind": "core",
+    "module": "arrowhead/ah5-core-go/serviceorchestration-simple",
+    "entry": "./cmd/serviceorchestration-simple",
+    "port": 8442,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-core-go/serviceorchestration-simple",
+    "configType": "json"
+  },
+  {
+    "name": "ServiceRegistry",
+    "path": "ah5-core-go/serviceregistry",
+    "kind": "core",
+    "module": "arrowhead/serviceregistry",
+    "entry": ".",
+    "port": 8443,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-core-go/ServiceRegistry",
+    "configType": "properties"
+  },
+  {
+    "name": "Blacklist",
+    "path": "ah5-Blacklist-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/blacklist",
+    "entry": "./cmd/blacklist",
+    "port": 8464,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "Configuration",
+    "path": "ah5-Configuration-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/configuration",
+    "entry": "./cmd/configuration",
+    "port": 8459,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "DataManager",
+    "path": "ah5-DataManager-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/datamanager",
+    "entry": "./cmd/datamanager",
+    "port": 8461,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "TimeManager",
+    "path": "ah5-TimeManager-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/timemanager",
+    "entry": "./cmd/timemanager",
+    "port": 8463,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "EventHandler",
+    "path": "ah5-EventHandler-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/eventhandler",
+    "entry": "./cmd/eventhandler",
+    "port": 8455,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "path": "ah5-DeviceQoSEvaluator-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/deviceqosevaluator",
+    "entry": "./cmd/deviceqosevaluator",
+    "port": 8472,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "AIGym",
+    "path": "ah5-AIGym-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/aigym",
+    "entry": "./cmd/aigym",
+    "port": 8478,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "path": "ah5-PlantDescriptionEngine-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/plantdescriptionengine",
+    "entry": "./cmd/plantdescriptionengine",
+    "port": 8432,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "Choreographer",
+    "path": "ah5-Choreographer-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/choreographer",
+    "entry": "./cmd/choreographer",
+    "port": 8457,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "CertificateAuthority",
+    "path": "ah5-CertificateAuthority-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/certificateauthority",
+    "entry": "./cmd/certificateauthority",
+    "port": 8448,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "SysMonitor",
+    "path": "ah5-SysMonitor-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/sysmonitor",
+    "entry": "./cmd/sysmonitor",
+    "port": 8475,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "Onboarding",
+    "path": "ah5-Onboarding-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/onboarding",
+    "entry": "./cmd/onboarding",
+    "port": 8435,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "TestTranslation",
+    "path": "ah5-TestTranslation-go",
+    "kind": "test",
+    "module": "arrowhead/ah5-support-go/testtranslation",
+    "entry": "./cmd/testtranslation",
+    "port": 8552,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "TranslationManager",
+    "path": "ah5-TranslationManager-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/translationmanager",
+    "entry": "./cmd/translationmanager",
+    "port": 8465,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "Gatekeeper",
+    "path": "ah5-Gatekeeper-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/gatekeeper",
+    "entry": "./cmd/gatekeeper",
+    "port": 8449,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "GateTunnel",
+    "path": "ah5-GateTunnel-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/gatetunnel",
+    "entry": "./cmd/gatetunnel",
+    "port": 8453,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go",
+    "configType": "json"
+  },
+  {
+    "name": "LocalCloudManager",
+    "path": "ah5-LocalCloudManager-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/localcloudmanager",
+    "entry": "./cmd/localcloudmanager",
+    "port": 8480,
+    "source": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-go/LocalCloudManager",
+    "configType": "environment"
+  },
+  {
+    "name": "LocalCloudConfigurator",
+    "path": "ah5-LocalCloudConfigurator-go",
+    "kind": "support",
+    "module": "arrowhead/ah5-support-go/localcloudconfigurator",
+    "entry": "./cmd/localcloudconfigurator",
+    "port": 8095,
+    "source": "new (2026-10-29), not from a supplied tree",
+    "configType": "json"
+  }
+]

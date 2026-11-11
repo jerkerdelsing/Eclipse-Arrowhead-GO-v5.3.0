@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Authentication",
+    "path": "ah5-core-go/authentication",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.61,
+    "log": "verification/Authentication-test.log",
+    "testsPassed": 139,
+    "testsFailed": 0
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "path": "ah5-core-go/consumer-authorization",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.61,
+    "log": "verification/ConsumerAuthorization-test.log",
+    "testsPassed": 139,
+    "testsFailed": 0
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-dynamic",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.46,
+    "log": "verification/DynamicServiceOrchestration-test.log",
+    "testsPassed": 139,
+    "testsFailed": 0
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-simple",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.46,
+    "log": "verification/SimpleStoreServiceOrchestration-test.log",
+    "testsPassed": 139,
+    "testsFailed": 0
+  },
+  {
+    "name": "ServiceRegistry",
+    "path": "ah5-core-go/serviceregistry",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.26,
+    "log": "verification/ServiceRegistry-test.log",
+    "testsPassed": 25,
+    "testsFailed": 0
+  },
+  {
+    "name": "Blacklist",
+    "path": "ah5-Blacklist-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.31,
+    "log": "verification/Blacklist-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "Configuration",
+    "path": "ah5-Configuration-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.41,
+    "log": "verification/Configuration-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "DataManager",
+    "path": "ah5-DataManager-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.38,
+    "log": "verification/DataManager-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "TimeManager",
+    "path": "ah5-TimeManager-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.38,
+    "log": "verification/TimeManager-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "EventHandler",
+    "path": "ah5-EventHandler-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.37,
+    "log": "verification/EventHandler-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "path": "ah5-DeviceQoSEvaluator-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.34,
+    "log": "verification/DeviceQoSEvaluator-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "AIGym",
+    "path": "ah5-AIGym-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.34,
+    "log": "verification/AIGym-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "path": "ah5-PlantDescriptionEngine-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.38,
+    "log": "verification/PlantDescriptionEngine-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "Choreographer",
+    "path": "ah5-Choreographer-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.38,
+    "log": "verification/Choreographer-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "CertificateAuthority",
+    "path": "ah5-CertificateAuthority-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "log": "verification/CertificateAuthority-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "SysMonitor",
+    "path": "ah5-SysMonitor-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "log": "verification/SysMonitor-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "Onboarding",
+    "path": "ah5-Onboarding-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.93,
+    "log": "verification/Onboarding-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "TestTranslation",
+    "path": "ah5-TestTranslation-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.93,
+    "log": "verification/TestTranslation-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "TranslationManager",
+    "path": "ah5-TranslationManager-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.4,
+    "log": "verification/TranslationManager-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "Gatekeeper",
+    "path": "ah5-Gatekeeper-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.4,
+    "log": "verification/Gatekeeper-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "GateTunnel",
+    "path": "ah5-GateTunnel-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.43,
+    "log": "verification/GateTunnel-test.log",
+    "testsPassed": 55,
+    "testsFailed": 0
+  },
+  {
+    "name": "LocalCloudManager",
+    "path": "ah5-LocalCloudManager-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 0.45,
+    "log": "verification/LocalCloudManager-test.log",
+    "testsPassed": 35,
+    "testsFailed": 0
+  },
+  {
+    "name": "LocalCloudConfigurator",
+    "path": "ah5-LocalCloudConfigurator-go",
+    "action": "test",
+    "exitCode": 0,
+    "seconds": 1.35,
+    "log": "verification/LocalCloudConfigurator-test.log",
+    "testsPassed": 18,
+    "testsFailed": 0
+  }
+]

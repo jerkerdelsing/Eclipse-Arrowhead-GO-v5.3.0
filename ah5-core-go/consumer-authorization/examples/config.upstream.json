@@ -1,0 +1,19 @@
+{
+  "name": "ConsumerAuthorization",
+  "listen": "127.0.0.1:15443",
+  "cloudSuffix": "GoCloud.Arrowhead.arrowhead.eu",
+  "certificate": "certs/consumer-authorization.pem",
+  "privateKey": "certs/consumer-authorization.key",
+  "ca": "certs/trust-ca.pem",
+  "state": "state/consumer-authorization.json",
+  "passwordFile": "secrets/consumer-authorization-password",
+  "tokenSecretFile": "secrets/token-secret",
+  "authenticationURL": "https://127.0.0.1:15445",
+  "serviceRegistryURL": "https://127.0.0.1:15441",
+  "tokenTTLSeconds": 600,
+  "tokenUsageLimit": 1,
+  "managementWhitelist": [],
+  "register": false,
+  "advertiseAddress": "127.0.0.1",
+  "advertisePort": 15443
+}

@@ -1,0 +1,27 @@
+go 1.26.0
+
+use (
+	./ah5-AIGym-go
+	./ah5-Blacklist-go
+	./ah5-CertificateAuthority-go
+	./ah5-Choreographer-go
+	./ah5-Configuration-go
+	./ah5-DataManager-go
+	./ah5-DeviceQoSEvaluator-go
+	./ah5-EventHandler-go
+	./ah5-GateTunnel-go
+	./ah5-Gatekeeper-go
+	./ah5-LocalCloudConfigurator-go
+	./ah5-LocalCloudManager-go
+	./ah5-Onboarding-go
+	./ah5-PlantDescriptionEngine-go
+	./ah5-SysMonitor-go
+	./ah5-TestTranslation-go
+	./ah5-TimeManager-go
+	./ah5-TranslationManager-go
+	./ah5-core-go/authentication
+	./ah5-core-go/consumer-authorization
+	./ah5-core-go/serviceorchestration-dynamic
+	./ah5-core-go/serviceorchestration-simple
+	./ah5-core-go/serviceregistry
+)

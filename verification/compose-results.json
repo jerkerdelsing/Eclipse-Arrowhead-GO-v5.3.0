@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Authentication",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "ServiceRegistry",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "Blacklist",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "Configuration",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "DataManager",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "TimeManager",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "EventHandler",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "AIGym",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "Choreographer",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "CertificateAuthority",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "SysMonitor",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "Onboarding",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "TestTranslation",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "TranslationManager",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "Gatekeeper",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "GateTunnel",
+    "exitCode": 0,
+    "error": ""
+  },
+  {
+    "name": "LocalCloudManager",
+    "exitCode": 0,
+    "error": ""
+  }
+]

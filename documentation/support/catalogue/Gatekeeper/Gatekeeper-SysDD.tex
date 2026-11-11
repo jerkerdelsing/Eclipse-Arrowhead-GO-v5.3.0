@@ -1,0 +1,52 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{Gatekeeper (Go)}
+\ArrowheadType{System Design Description}
+\ArrowheadTypeShort{SysDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Gatekeeper}
+\subsection{System overview}
+Cross-cloud discovery and negotiation. The native Go executable selects this system independently; no Java or Python process implements its operations. Shared source is in \path{internal/core}; federation code is in \path{internal/relay}.
+\subsection{Produced and consumed services}
+Produced HTTPS services: \path{echo}, \allowbreak \path{gatekeeperManagement}, \allowbreak \path{generalManagement}, \allowbreak \path{globalServiceDiscovery}, \allowbreak \path{interCloudNegotiation}.
+HTTPS service version 5.2.2. Optional native AMQPS telemetry produces \texttt{sysMonitor}; SysMonitor additionally publishes \texttt{sysMonitorData} over MQTT/TLS. Consumed authorities include ServiceRegistry, Authentication and ConsumerAuthorization; optional dependencies are explicit pinned HTTPS origins.
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Reuses the existing native Go legacy-mTLS relay engine, adapted to pinned clients. AH-GT-1 end-to-end encryption is absent. Broker ACLs and trusted neighbour provisioning remain required; no live federation is exercised by this delivery.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\subsection{Security and persistence}
+Mutual TLS verifies the configured cloud trust anchors. Application identity tokens must match the client certificate. Authorities are pinned by system CN/profile before credentials are sent. Management requires a verified sysop identity or an explicit broad management whitelist. The default service authorization policy is enforce; identity-only mode must be explicitly selected. No insecure listener or declared-identity mode is implemented. Each executable owns one locked state file, written through fsync and atomic rename. Cross-system operations are not distributed transactions.
+\section{Implementation}
+Go 1.26 or newer builds the native binary. State is serialized as private JSON documents; updates clone state, validate, persist and then publish. Server timeouts and bounded message sizes constrain resource use. Persistent outboxes are at-least-once and cannot provide distributed exactly-once delivery. Detailed source, configuration and test instructions are in the repository README and verification report.
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/gatekeeper/echo} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_gsd} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_multi_gsd} & identity\\
+\texttt{POST} & \path{/gatekeeper/init_icn} & identity\\
+\texttt{GET} & \path{/gatekeeper/mgmt/clouds} & management\\
+\texttt{POST} & \path{/gatekeeper/mgmt/clouds} & management\\
+\texttt{DELETE} & \path{/gatekeeper/mgmt/clouds/{operator}/{name}} & management\\
+\texttt{GET} & \path{/gatekeeper/mgmt/relays} & management\\
+\texttt{POST} & \path{/gatekeeper/mgmt/relays} & management\\
+\texttt{GET} & \path{/gatekeeper/mgmt/status} & management\\
+\texttt{GET} & \path{/gatekeeper/monitor/echo} & certificate\\
+\texttt{GET} & \path{/gatekeeper/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/gatekeeper/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\end{document}

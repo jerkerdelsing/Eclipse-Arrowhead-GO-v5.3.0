@@ -1,0 +1,104 @@
+{"Time":"2026-11-09T10:29:27.51753+01:00","Action":"start","Package":"arrowhead/serviceregistry"}
+{"Time":"2026-11-09T10:29:27.517624+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestEchoAndAuth"}
+{"Time":"2026-11-09T10:29:27.517632+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestEchoAndAuth","Output":"=== RUN   TestEchoAndAuth\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517647+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestEchoAndAuth","Output":"--- PASS: TestEchoAndAuth (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517653+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestEchoAndAuth","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517663+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestSystemAndServiceLifecycle"}
+{"Time":"2026-11-09T10:29:27.517667+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSystemAndServiceLifecycle","Output":"=== RUN   TestSystemAndServiceLifecycle\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517673+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSystemAndServiceLifecycle","Output":"--- PASS: TestSystemAndServiceLifecycle (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517677+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestSystemAndServiceLifecycle","Elapsed":0.01}
+{"Time":"2026-11-09T10:29:27.517686+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestDeviceDiscoveryAndLocking"}
+{"Time":"2026-11-09T10:29:27.517689+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestDeviceDiscoveryAndLocking","Output":"=== RUN   TestDeviceDiscoveryAndLocking\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517693+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestDeviceDiscoveryAndLocking","Output":"--- PASS: TestDeviceDiscoveryAndLocking (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517698+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestDeviceDiscoveryAndLocking","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517701+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestErrorBodies"}
+{"Time":"2026-11-09T10:29:27.517705+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestErrorBodies","Output":"=== RUN   TestErrorBodies\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517708+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestErrorBodies","Output":"--- PASS: TestErrorBodies (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517712+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestErrorBodies","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517715+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestManagementCRUDAndCascades"}
+{"Time":"2026-11-09T10:29:27.517718+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestManagementCRUDAndCascades","Output":"=== RUN   TestManagementCRUDAndCascades\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517722+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestManagementCRUDAndCascades","Output":"--- PASS: TestManagementCRUDAndCascades (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517726+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestManagementCRUDAndCascades","Elapsed":0.01}
+{"Time":"2026-11-09T10:29:27.51773+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestManagementFilter"}
+{"Time":"2026-11-09T10:29:27.517733+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestManagementFilter","Output":"=== RUN   TestManagementFilter\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517737+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestManagementFilter","Output":"--- PASS: TestManagementFilter (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51774+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestManagementFilter","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517748+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestSelfRegistrationAndPersistence"}
+{"Time":"2026-11-09T10:29:27.517751+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSelfRegistrationAndPersistence","Output":"=== RUN   TestSelfRegistrationAndPersistence\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517755+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSelfRegistrationAndPersistence","Output":"--- PASS: TestSelfRegistrationAndPersistence (0.08s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517759+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestSelfRegistrationAndPersistence","Elapsed":0.08}
+{"Time":"2026-11-09T10:29:27.517763+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestMetadataOperators"}
+{"Time":"2026-11-09T10:29:27.517766+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMetadataOperators","Output":"=== RUN   TestMetadataOperators\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51777+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMetadataOperators","Output":"--- PASS: TestMetadataOperators (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517773+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestMetadataOperators","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517777+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestAuthenticatorKey"}
+{"Time":"2026-11-09T10:29:27.517779+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthenticatorKey","Output":"=== RUN   TestAuthenticatorKey\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517783+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthenticatorKey","Output":"--- PASS: TestAuthenticatorKey (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517787+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestAuthenticatorKey","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.51779+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestIdentityBootstrapLookupIsNotAuthorizationFiltered"}
+{"Time":"2026-11-09T10:29:27.517794+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestIdentityBootstrapLookupIsNotAuthorizationFiltered","Output":"=== RUN   TestIdentityBootstrapLookupIsNotAuthorizationFiltered\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517799+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestIdentityBootstrapLookupIsNotAuthorizationFiltered","Output":"--- PASS: TestIdentityBootstrapLookupIsNotAuthorizationFiltered (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517802+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestIdentityBootstrapLookupIsNotAuthorizationFiltered","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517806+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestAuthorityServiceRegistrationReserved"}
+{"Time":"2026-11-09T10:29:27.517809+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthorityServiceRegistrationReserved","Output":"=== RUN   TestAuthorityServiceRegistrationReserved\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517812+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthorityServiceRegistrationReserved","Output":"--- PASS: TestAuthorityServiceRegistrationReserved (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517816+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestAuthorityServiceRegistrationReserved","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517819+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestAuthorityProviderSubstitutionRejected"}
+{"Time":"2026-11-09T10:29:27.517821+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthorityProviderSubstitutionRejected","Output":"=== RUN   TestAuthorityProviderSubstitutionRejected\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517828+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestAuthorityProviderSubstitutionRejected","Output":"--- PASS: TestAuthorityProviderSubstitutionRejected (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517832+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestAuthorityProviderSubstitutionRejected","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517835+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestV522ManagementAuthorizationTarget"}
+{"Time":"2026-11-09T10:29:27.517838+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestV522ManagementAuthorizationTarget","Output":"=== RUN   TestV522ManagementAuthorizationTarget\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517842+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestV522ManagementAuthorizationTarget","Output":"--- PASS: TestV522ManagementAuthorizationTarget (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517845+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestV522ManagementAuthorizationTarget","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517848+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestParseExtraInterfacesDefaultsAndValidation"}
+{"Time":"2026-11-09T10:29:27.517851+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestParseExtraInterfacesDefaultsAndValidation","Output":"=== RUN   TestParseExtraInterfacesDefaultsAndValidation\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517854+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestParseExtraInterfacesDefaultsAndValidation","Output":"--- PASS: TestParseExtraInterfacesDefaultsAndValidation (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517858+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestParseExtraInterfacesDefaultsAndValidation","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517861+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestSelfRequestAddsConfiguredIngress"}
+{"Time":"2026-11-09T10:29:27.517864+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSelfRequestAddsConfiguredIngress","Output":"=== RUN   TestSelfRequestAddsConfiguredIngress\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517868+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSelfRequestAddsConfiguredIngress","Output":"--- PASS: TestSelfRequestAddsConfiguredIngress (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517871+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestSelfRequestAddsConfiguredIngress","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517874+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestListeningPortDefaultAndOverride"}
+{"Time":"2026-11-09T10:29:27.517879+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestListeningPortDefaultAndOverride","Output":"=== RUN   TestListeningPortDefaultAndOverride\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517883+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestListeningPortDefaultAndOverride","Output":"--- PASS: TestListeningPortDefaultAndOverride (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517887+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestListeningPortDefaultAndOverride","Elapsed":0.01}
+{"Time":"2026-11-09T10:29:27.51789+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestMQTTAdapter"}
+{"Time":"2026-11-09T10:29:27.517893+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMQTTAdapter","Output":"=== RUN   TestMQTTAdapter\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517896+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMQTTAdapter","Output":"--- PASS: TestMQTTAdapter (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517909+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestMQTTAdapter","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517912+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestMQTTRegistrationInterface"}
+{"Time":"2026-11-09T10:29:27.517915+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMQTTRegistrationInterface","Output":"=== RUN   TestMQTTRegistrationInterface\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517919+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestMQTTRegistrationInterface","Output":"--- PASS: TestMQTTRegistrationInterface (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517922+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestMQTTRegistrationInterface","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517926+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestBlacklistIsNotCheckedForItself"}
+{"Time":"2026-11-09T10:29:27.517929+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestBlacklistIsNotCheckedForItself","Output":"=== RUN   TestBlacklistIsNotCheckedForItself\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517933+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestBlacklistIsNotCheckedForItself","Output":"--- PASS: TestBlacklistIsNotCheckedForItself (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517937+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestBlacklistIsNotCheckedForItself","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.51794+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestReservedServiceDefinitions"}
+{"Time":"2026-11-09T10:29:27.517943+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestReservedServiceDefinitions","Output":"=== RUN   TestReservedServiceDefinitions\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517947+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestReservedServiceDefinitions","Output":"--- PASS: TestReservedServiceDefinitions (0.01s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51795+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestReservedServiceDefinitions","Elapsed":0.01}
+{"Time":"2026-11-09T10:29:27.517954+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestReservedDefinitionOverrides"}
+{"Time":"2026-11-09T10:29:27.517956+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestReservedDefinitionOverrides","Output":"=== RUN   TestReservedDefinitionOverrides\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51796+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestReservedDefinitionOverrides","Output":"--- PASS: TestReservedDefinitionOverrides (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517963+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestReservedDefinitionOverrides","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517966+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestSecretFiles"}
+{"Time":"2026-11-09T10:29:27.517969+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSecretFiles","Output":"=== RUN   TestSecretFiles\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517973+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSecretFiles","Output":"--- PASS: TestSecretFiles (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517976+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestSecretFiles","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517979+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestSysMonitorRegistrationAndObservations"}
+{"Time":"2026-11-09T10:29:27.517982+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSysMonitorRegistrationAndObservations","Output":"=== RUN   TestSysMonitorRegistrationAndObservations\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517991+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestSysMonitorRegistrationAndObservations","Output":"--- PASS: TestSysMonitorRegistrationAndObservations (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.517995+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestSysMonitorRegistrationAndObservations","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.517999+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestBindToCertificate"}
+{"Time":"2026-11-09T10:29:27.518003+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestBindToCertificate","Output":"=== RUN   TestBindToCertificate\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.518007+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestBindToCertificate","Output":"--- PASS: TestBindToCertificate (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51801+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestBindToCertificate","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.518014+01:00","Action":"run","Package":"arrowhead/serviceregistry","Test":"TestIsIdentityLookup"}
+{"Time":"2026-11-09T10:29:27.518017+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestIsIdentityLookup","Output":"=== RUN   TestIsIdentityLookup\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.518021+01:00","Action":"output","Package":"arrowhead/serviceregistry","Test":"TestIsIdentityLookup","Output":"--- PASS: TestIsIdentityLookup (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.518024+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Test":"TestIsIdentityLookup","Elapsed":0}
+{"Time":"2026-11-09T10:29:27.518027+01:00","Action":"output","Package":"arrowhead/serviceregistry","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-11-09T10:29:27.51803+01:00","Action":"output","Package":"arrowhead/serviceregistry","Output":"ok  \tarrowhead/serviceregistry\t(cached)\n"}
+{"Time":"2026-11-09T10:29:27.518036+01:00","Action":"pass","Package":"arrowhead/serviceregistry","Elapsed":0.001}

@@ -1,0 +1,36 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{gatekeeperManagement (Go)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service overview}
+Definition: \path{gatekeeperManagement}, version 5.2.2. Produced by \texttt{Gatekeeper}; HTTPS uses \texttt{generic\_https} and \texttt{CERT\_AUTH}. Consumption authorization and management restrictions are additionally enforced at the application layer. Base path: \path{/gatekeeper}.
+\section{Operations}
+\begin{description}
+\item[add-cloud] \texttt{POST} \path{/mgmt/clouds}.
+\item[add-relay] \texttt{POST} \path{/mgmt/relays}.
+\item[clouds] \texttt{GET} \path{/mgmt/clouds}.
+\item[relays] \texttt{GET} \path{/mgmt/relays}.
+\item[remove-cloud] \texttt{DELETE} \path{/mgmt/clouds/{operator}/{name}}.
+\item[status] \texttt{GET} \path{/mgmt/status}.
+\end{description}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item Reuses the existing native Go legacy-mTLS relay engine, adapted to pinned clients. AH-GT-1 end-to-end encryption is absent. Broker ACLs and trusted neighbour provisioning remain required; no live federation is exercised by this delivery.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\section{Interface contract}
+See the system HTTPS IDD and the Java source inventory for DTO fields and reference traceability. Successful local tests do not establish all Java behavioral or failure semantics.\end{document}

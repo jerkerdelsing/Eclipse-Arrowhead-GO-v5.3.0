@@ -1,0 +1,38 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\tabcolsep}{3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{DynamicServiceOrchestration (Go)}
+\ArrowheadType{System Design Description}
+\ArrowheadTypeShort{SysDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-23}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go core implementations}
+\ArrowheadSetup
+\section{System context}
+DynamicServiceOrchestration discovers providers through ServiceRegistry, verifies consumers through ConsumerAuthorization and returns eligible interfaces. PDE supplies engineering constraints through a separate snapshot API. The implementation shares the native Go core runtime; no Java or Rust process implements it. Existing supported dynamic orchestration and optional SimpleStore services retain their separate identities and state.
+
+\section{PDE and DSO snapshot extension (23 October 2026)}
+The local Java, Go and native Rust implementations provide the same HTTPS snapshot contract. The registered service is \texttt{serviceOrchestrationPlantManagement}, version 1.0.0. The API is a local extension to the upstream framework.
+\begin{longtable}{p{0.12\textwidth}p{0.70\textwidth}}\toprule
+Method & Resource and operation\\\midrule\endhead
+POST & \path{/serviceorchestration/mgmt/plant-rules/query} (query)\\
+PUT & \path{/serviceorchestration/mgmt/plant-rules/replace} (replace)\\\bottomrule
+\end{longtable}
+Both operations return the complete snapshot. The request for replacement has \texttt{rules}, an array of scopes. Each scope contains \texttt{consumer}, \texttt{serviceDefinition}, and \texttt{providers}; each provider contains \texttt{serviceInstanceId} and integer \texttt{priority}. Priority zero is valid; lower values rank first. Duplicate scopes and provider IDs, null arrays, and invalid priorities are rejected before commit. Empty rules clear management; empty providers retain a managed but unavailable scope.
+\par\medskip
+PDE composes includes and resolves names/metadata against registered systems and instances. Named consumers remain managed when unregistered; missing or ambiguous producers retain empty scopes. Repeated provider IDs use the minimum priority. PDE queries before replacing and requires an equal acknowledgment. Failed reads do not clear rules. Registry query pages are bounded at 1000 entries. An incomplete response fails synchronization and preserves the last DSO snapshot. Changes reconcile normally within two seconds of a plant change and within thirty seconds of registry changes. \path{/plantdescriptionengine/mgmt/sync-status} exposes the loop state under management access.
+\par\medskip
+DSO restricts candidates to the scope, retains existing authorization, operation/interface and exclusivity checks, then ranks eligible providers. Matchmaking selects the lowest eligible priority. A denied or missing primary can use an engineered fallback. Unrelated providers and both inter-cloud flags cannot escape a managed scope. Unsupported existing translation/QoS features remain unsupported.
+\par\medskip
+Mutual TLS and certificate-bound identity tokens remain mandatory. Only PDE or Sysop can replace; PDE, LocalCloudManager or Sysop can query. PDE gains no general DSO administration right. ServiceRegistry reserves the new service definition for DSO. Native Rust permits PDE only the two required registry query operations. DSO's \texttt{plantRules.active} record is persisted by an atomic private JSON commit and survives restart. Existing native state files need no SQL migration. Java uses its separate table migration.
+\par\medskip
+The Go deployment script regenerates pinned runtime origins and installs scoped policies; the Rust script targets the native candidate. Both preserve state. Legacy SimpleStore rows remain independent and are not imported or automatically deleted. Coordinated rollback must restore PDE and its backend together. Current live evidence covers priority zero, fallback, unavailable producers, both inter-cloud guards, restart persistence with PDE stopped, and deactivation. This does not claim complete Java equivalence or production load qualification.
+\end{document}

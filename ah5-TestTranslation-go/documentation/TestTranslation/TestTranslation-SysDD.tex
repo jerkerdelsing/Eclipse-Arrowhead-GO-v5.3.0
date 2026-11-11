@@ -1,0 +1,37 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{TestTranslation (Go)}
+\ArrowheadType{System Design Description}
+\ArrowheadTypeShort{SysDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-24}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Design}
+\subsection{Structure}
+The shared support runtime provides mutual TLS, identity-token binding, ConsumerAuthorization checks, registration, telemetry and the JSON state. \path{testtranslation.go} adds the interface translator, the data model translator and the bridge data plane (route \path{/testtranslation/bridge/{bridgeId}/{path...}}, access \texttt{bridge}).
+\subsection{Bridge lifecycle}
+\begin{enumerate}
+\item \texttt{check-targets}: returns the targets having a \texttt{generic\_https} interface (policy \texttt{CERT\_AUTH} or \texttt{NONE}) with an access address, port and the requested operation.
+\item \texttt{initialize-bridge}: stores the bridge (operation method and path template, target interface properties, input and result data model translator descriptors) and answers the bridge interface: \texttt{generic\_https}, policy \texttt{TRANSLATION\_BRIDGE\_TOKEN\_AUTH}, base path \path{/testtranslation/bridge/<bridgeId>}, the operation, and \texttt{dataModels} of the consumer.
+\item A bridge call: token and operation check; the body is translated by the input data model translator (\texttt{init-translation}, then \texttt{get-translation-result}); the request (query string included) is forwarded to the target with TestTranslation's identity; a successful result is translated by the result data model translator; \texttt{USED} is reported. An unreachable target reports \texttt{EXTERNAL\_ERROR} and ends the bridge; a failed translation reports \texttt{INTERNAL\_ERROR}.
+\item \texttt{abort-bridge/<bridgeId>}: only the system that initialized the bridge may abort it; the bridge stops forwarding (404).
+\end{enumerate}
+\subsection{Persistence}
+Bridges: JSON state (\texttt{bridges}). Translation tasks: memory. No secrets are stored.
+\subsection{Important delimitations}
+TestTranslation is a test application system for the TranslationManager, not a production translator.
+\begin{itemize}
+\item One bridge kind: \texttt{generic\_https} to \texttt{generic\_https}, one negotiated operation per bridge; targets with \texttt{CERT\_AUTH} or \texttt{NONE} policies (authorization tokens for token-protected targets are not presented).
+\item Data models \texttt{simpleJson} and \texttt{senml} only; translations are synchronous (a task is \texttt{DONE} or \texttt{ERROR} when \texttt{init-translation} returns).
+\item Bridges are kept in the system's JSON state; translation tasks only in memory (latest 1000).
+\end{itemize}
+\end{document}

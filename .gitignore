@@ -1,0 +1,6 @@
+**/bin/
+**/state/
+**/certs/
+**/secrets/
+**/.env
+.DS_Store

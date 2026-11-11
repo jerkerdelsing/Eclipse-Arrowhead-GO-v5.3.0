@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Authentication",
+    "isolatedBuild": true,
+    "help": true,
+    "nativeRegistryIntegration": false
+  },
+  {
+    "name": "Blacklist",
+    "isolatedBuild": true,
+    "help": true
+  },
+  {
+    "name": "ServiceRegistry",
+    "isolatedBuild": true,
+    "help": true
+  },
+  {
+    "name": "LocalCloudManager",
+    "isolatedBuild": true,
+    "help": true
+  }
+]

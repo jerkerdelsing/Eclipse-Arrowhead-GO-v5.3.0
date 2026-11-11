@@ -1,0 +1,44 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{CertificateAuthority HTTPS / Go}
+\ArrowheadType{Interface Design Description}
+\ArrowheadTypeShort{IDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Interface overview}
+HTTPS, mandatory mutual TLS, Arrowhead identity-token header and JSON request/response documents. General management is sysop/whitelist protected; enrollment endpoints use approved certificate fingerprints and profile/serial checks instead of ordinary identity tokens. Error responses contain errorMessage, errorCode, origin and timestamp. Exact DTO and status/error parity is not certified.
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/certificate-authority/sign} & identity\\
+\texttt{POST} & \path{/certificate-authority/checkCertificate} & identity\\
+\texttt{GET} & \path{/certificate-authority/crl} & identity\\
+\texttt{GET} & \path{/certificate-authority/mgmt/certificates} & management\\
+\texttt{DELETE} & \path{/certificate-authority/mgmt/certificates/{id}} & identity\\
+\texttt{GET} & \path{/certificate-authority/mgmt/keys} & management\\
+\texttt{DELETE} & \path{/certificate-authority/mgmt/keys/{id}} & identity\\
+\texttt{POST} & \path{/certificate-authority/mgmt/revocations} & management\\
+\texttt{PUT} & \path{/certificate-authority/mgmt/keys} & management\\
+\texttt{POST} & \path{/certificate-authority/checkTrustedKey} & identity\\
+\texttt{GET} & \path{/certificate-authority/monitor/echo} & certificate\\
+\texttt{GET} & \path{/certificate-authority/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/certificate-authority/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item CSR and CRL operations use a separately provisioned CA key; no CA key is generated/copied by this port. CRL export does not prove enforcement by every relying party. Java SQL import, automatic CRL file publication, HSM/OCSP/HA are absent.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\end{document}

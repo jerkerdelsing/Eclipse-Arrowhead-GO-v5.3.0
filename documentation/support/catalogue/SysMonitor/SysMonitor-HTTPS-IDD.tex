@@ -1,0 +1,43 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{SysMonitor HTTPS / Go}
+\ArrowheadType{Interface Design Description}
+\ArrowheadTypeShort{IDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Interface overview}
+HTTPS, mandatory mutual TLS, Arrowhead identity-token header and JSON request/response documents. General management is sysop/whitelist protected; enrollment endpoints use approved certificate fingerprints and profile/serial checks instead of ordinary identity tokens. Error responses contain errorMessage, errorCode, origin and timestamp. Exact DTO and status/error parity is not certified.
+\subsection{HTTPS interface operations}
+The listener is HTTPS with JSON by default; raw configuration and CRL responses use their declared media types. A request body is capped at 1 MiB. The table records implemented routes, not a claim of complete behavioral conformance.
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{GET} & \path{/sysmonitor/management/status} & management\\
+\texttt{GET} & \path{/sysmonitor/management/providers} & management\\
+\texttt{GET} & \path{/sysmonitor/management/subscriptions} & management\\
+\texttt{PUT} & \path{/sysmonitor/management/subscriptions/{providerSystem}} & management\\
+\texttt{DELETE} & \path{/sysmonitor/management/subscriptions/{providerSystem}} & management\\
+\texttt{POST} & \path{/sysmonitor/management/reconcile} & management\\
+\texttt{GET} & \path{/sysmonitor/history/systems} & identity\\
+\texttt{GET} & \path{/sysmonitor/history/systems/{systemName}/latest} & identity\\
+\texttt{GET} & \path{/sysmonitor/history/systems/{systemName}/observations} & identity\\
+\texttt{GET} & \path{/sysmonitor/monitor/echo} & certificate\\
+\texttt{GET} & \path{/sysmonitor/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/sysmonitor/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item AMQPS intake and MQTT QoS1 outbox forwarding are implemented. MQTT uses Paho 3.1.1 rather than Java MQTTv5. Full live-broker/UI parity and imported Java history have not been certified. The default subscription is none until configured.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\end{document}

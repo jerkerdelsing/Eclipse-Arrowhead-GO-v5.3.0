@@ -1,0 +1,6 @@
+Authentication: isolated external-directory build and help PASS
+Optional native registry integration: registration compatibility failure; see log
+Blacklist: isolated external-directory build and help PASS
+ServiceRegistry: isolated external-directory build and help PASS
+LocalCloudManager: isolated external-directory build and help PASS
+All 16 dedicated support/test launchers reject role switching

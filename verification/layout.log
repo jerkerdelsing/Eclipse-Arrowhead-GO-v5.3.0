@@ -1,0 +1,24 @@
+Authentication: independent module layout OK
+ConsumerAuthorization: independent module layout OK
+DynamicServiceOrchestration: independent module layout OK
+SimpleStoreServiceOrchestration: independent module layout OK
+ServiceRegistry: independent module layout OK
+Blacklist: independent module layout OK
+Configuration: independent module layout OK
+DataManager: independent module layout OK
+TimeManager: independent module layout OK
+EventHandler: independent module layout OK
+DeviceQoSEvaluator: independent module layout OK
+AIGym: independent module layout OK
+PlantDescriptionEngine: independent module layout OK
+Choreographer: independent module layout OK
+CertificateAuthority: independent module layout OK
+SysMonitor: independent module layout OK
+Onboarding: independent module layout OK
+TestTranslation: independent module layout OK
+TranslationManager: independent module layout OK
+Gatekeeper: independent module layout OK
+GateTunnel: independent module layout OK
+LocalCloudManager: independent module layout OK
+Modules: 22 Source hashes checked: 381
+PASS: no sibling Arrowhead source imports; available original source snapshots unchanged (use --check-originals to require originals)

@@ -1,0 +1,6 @@
+FROM scratch
+COPY build/serviceregistry-linux-amd64 /serviceregistry
+COPY application.properties /config/application.properties
+ENV DATA_FILE=/data/serviceregistry.json
+EXPOSE 8443
+ENTRYPOINT ["/serviceregistry", "-config", "/config/application.properties"]

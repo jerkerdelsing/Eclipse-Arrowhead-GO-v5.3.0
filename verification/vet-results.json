@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Authentication",
+    "path": "ah5-core-go/authentication",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 1.27,
+    "log": "verification/Authentication-vet.log"
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "path": "ah5-core-go/consumer-authorization",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 1.27,
+    "log": "verification/ConsumerAuthorization-vet.log"
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-dynamic",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.45,
+    "log": "verification/DynamicServiceOrchestration-vet.log"
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-simple",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.45,
+    "log": "verification/SimpleStoreServiceOrchestration-vet.log"
+  },
+  {
+    "name": "ServiceRegistry",
+    "path": "ah5-core-go/serviceregistry",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "log": "verification/ServiceRegistry-vet.log"
+  },
+  {
+    "name": "Blacklist",
+    "path": "ah5-Blacklist-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.31,
+    "log": "verification/Blacklist-vet.log"
+  },
+  {
+    "name": "Configuration",
+    "path": "ah5-Configuration-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.35,
+    "log": "verification/Configuration-vet.log"
+  },
+  {
+    "name": "DataManager",
+    "path": "ah5-DataManager-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.34,
+    "log": "verification/DataManager-vet.log"
+  },
+  {
+    "name": "TimeManager",
+    "path": "ah5-TimeManager-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.31,
+    "log": "verification/TimeManager-vet.log"
+  },
+  {
+    "name": "EventHandler",
+    "path": "ah5-EventHandler-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.31,
+    "log": "verification/EventHandler-vet.log"
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "path": "ah5-DeviceQoSEvaluator-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.35,
+    "log": "verification/DeviceQoSEvaluator-vet.log"
+  },
+  {
+    "name": "AIGym",
+    "path": "ah5-AIGym-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.34,
+    "log": "verification/AIGym-vet.log"
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "path": "ah5-PlantDescriptionEngine-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.32,
+    "log": "verification/PlantDescriptionEngine-vet.log"
+  },
+  {
+    "name": "Choreographer",
+    "path": "ah5-Choreographer-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.32,
+    "log": "verification/Choreographer-vet.log"
+  },
+  {
+    "name": "CertificateAuthority",
+    "path": "ah5-CertificateAuthority-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.32,
+    "log": "verification/CertificateAuthority-vet.log"
+  },
+  {
+    "name": "SysMonitor",
+    "path": "ah5-SysMonitor-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.32,
+    "log": "verification/SysMonitor-vet.log"
+  },
+  {
+    "name": "Onboarding",
+    "path": "ah5-Onboarding-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.36,
+    "log": "verification/Onboarding-vet.log"
+  },
+  {
+    "name": "TestTranslation",
+    "path": "ah5-TestTranslation-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.36,
+    "log": "verification/TestTranslation-vet.log"
+  },
+  {
+    "name": "TranslationManager",
+    "path": "ah5-TranslationManager-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.36,
+    "log": "verification/TranslationManager-vet.log"
+  },
+  {
+    "name": "Gatekeeper",
+    "path": "ah5-Gatekeeper-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.35,
+    "log": "verification/Gatekeeper-vet.log"
+  },
+  {
+    "name": "GateTunnel",
+    "path": "ah5-GateTunnel-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.39,
+    "log": "verification/GateTunnel-vet.log"
+  },
+  {
+    "name": "LocalCloudManager",
+    "path": "ah5-LocalCloudManager-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 0.39,
+    "log": "verification/LocalCloudManager-vet.log"
+  },
+  {
+    "name": "LocalCloudConfigurator",
+    "path": "ah5-LocalCloudConfigurator-go",
+    "action": "vet",
+    "exitCode": 0,
+    "seconds": 1.47,
+    "log": "verification/LocalCloudConfigurator-vet.log"
+  }
+]

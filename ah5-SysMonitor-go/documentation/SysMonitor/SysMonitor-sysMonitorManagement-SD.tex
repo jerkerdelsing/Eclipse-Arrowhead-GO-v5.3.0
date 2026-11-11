@@ -1,0 +1,36 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{sysMonitorManagement (Go)}
+\ArrowheadType{Service Description}
+\ArrowheadTypeShort{SD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-16}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Service overview}
+Definition: \path{sysMonitorManagement}, version 1.0.0. Produced by \texttt{SysMonitor}; HTTPS uses \texttt{generic\_https} and \texttt{CERT\_AUTH}. Consumption authorization and management restrictions are additionally enforced at the application layer. Base path: \path{/sysmonitor}.
+\section{Operations}
+\begin{description}
+\item[providers] \texttt{GET} \path{/management/providers}.
+\item[reconcile] \texttt{POST} \path{/management/reconcile}.
+\item[status] \texttt{GET} \path{/management/status}.
+\item[subscribe] \texttt{PUT} \path{/management/subscriptions/{providerSystem}}.
+\item[subscriptions] \texttt{GET} \path{/management/subscriptions}.
+\item[unsubscribe] \texttt{DELETE} \path{/management/subscriptions/{providerSystem}}.
+\end{description}
+\subsection{Important delimitations}
+This implementation is a development profile, not a certified interchangeable Java replacement. All systems use private JSON snapshots rather than the Java databases. MQTT application APIs, exhaustive DTO normalization and error parity, automatic data migration and production qualification remain outstanding.
+\begin{itemize}
+\item AMQPS intake and MQTT QoS1 outbox forwarding are implemented. MQTT uses Paho 3.1.1 rather than Java MQTTv5. Full live-broker/UI parity and imported Java history have not been certified. The default subscription is none until configured.
+\item The source reference uses a shared non-Spring HTTP dispatcher. Its route coverage is not inferred from Go route presence; manual JavaSupportRuntime review is required.
+\end{itemize}
+\section{Interface contract}
+See the system HTTPS IDD and the Java source inventory for DTO fields and reference traceability. Successful local tests do not establish all Java behavioral or failure semantics.\end{document}

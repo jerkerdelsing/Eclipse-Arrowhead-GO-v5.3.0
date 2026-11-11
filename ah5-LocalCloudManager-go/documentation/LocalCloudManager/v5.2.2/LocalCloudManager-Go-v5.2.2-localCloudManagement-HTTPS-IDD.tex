@@ -1,0 +1,74 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl,enumitem}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{nosep,leftmargin=*}
+\begin{document}
+\ArrowheadTitle{LocalCloudManager / localCloudManagement-HTTPS-IDD (Go)}\ArrowheadType{Interface Design Description}\ArrowheadTypeShort{Go}
+\ArrowheadVersion{1.0.0}\ArrowheadDate{2026-10-17}
+\ArrowheadAuthor{Eclipse Arrowhead migration project}\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Project maintainers}\ArrowheadFooter{Eclipse Arrowhead -- Go LocalCloudManager -- EPL-2.0}
+\ArrowheadSetup
+\section{HTTPS interface overview}
+Target secure interface \path|generic_https|, policy CERT\_AUTH at transport; default standalone origin is \path|https://<provisioned-host>:8480|. The UI and API share the listener. Configure valid SANs and reverse-proxy client certificates if a proxy is used. Requests/responses are JSON except assets, echo and204login. Documented routes are the actual handlers; source registration metadata has known method/path mismatches. Tables use grouped methods or aliases where indicated.
+\begin{longtable}{p{0.12\textwidth}p{0.45\textwidth}p{0.31\textwidth}}\toprule
+Method & Actual handler path & Access / behavior\\\midrule\endhead
+GET & \path|/health| & transport. Runtime configuration, not readiness proof\\
+GET & \path|/ and /ui| & transport. Static embedded index\\
+GET & \path|/app.js and /assets/app.js| & transport. Embedded JavaScript\\
+GET & \path|/styles.css and /assets/styles.css| & transport. Embedded CSS\\
+GET & \path|/api/session| & console policy. authenticated/configured booleans\\
+POST & \path|/api/session| & console policy. Password login; 204 and cookie\\
+DELETE & \path|/api/session| & console policy. Invalidate cookie/session\\
+GET & \path|/api/overview| & session. Inventory/runtime aggregation; synthetic flags noted\\
+GET & \path|/api/service-registry-management| & session. Grouped devices/systems/services/runtime\\
+GET & \path|/api/datamanager| & session. Flatten historian; limit default240, max1000\\
+GET & \path|/api/consumers| & session. Service and simple-store consumer view\\
+GET & \path|/api/intercloud| & session. Static unavailable placeholder\\
+GET & \path|/api/sysmonitor| & session. Inherited observation adapter; optional system query\\
+GET & \path|/api/sysmonitor/subscriptions| & session. Read subscription adapter; synthetic intake flags\\
+PUT, DELETE & \path|/api/sysmonitor/subscriptions/{providerSystem}| & session + confirm. Acknowledgement only; NO provider write\\
+GET & \path|/api/plantdescriptions| & session. Plant records and registry catalogue\\
+POST & \path|/api/plantdescriptions| & session + confirm. Create through provider adapter\\
+PUT, PATCH, DELETE & \path|/api/plantdescriptions/{id}| & session + confirm. Provider replace/update/remove\\
+GET & \path|/api/orchestration/rules| & session. Simple store plus producer/consumer catalogue\\
+POST & \path|/api/orchestration/rules| & session + confirm. Validate consumer/instance/priority then create\\
+DELETE & \path|/api/orchestration/rules/{id}| & session + confirm. Remove via simple-store adapter\\
+GET & \path|/api/logs| & session. service query; tail default150, max500\\
+POST & \path|/api/containers/{service}/{action}| & session + confirm. Static allowlist, project filter; start/stop/restart\\
+GET & \path|/localcloud/management/status| & Arrowhead management. Legacy status response\\
+GET & \path|/localcloud/management/systems| & Arrowhead management. Registry systems query\\
+GET & \path|/localcloud/management/services| & Arrowhead management. Registry instances query\\
+GET & \path|/localcloud/monitor/echo| & Arrowhead identity. Text Got it!; registry metadata differs\\
+\bottomrule\end{longtable}
+\clearpage
+\section{Session and mutation DTOs}
+\path|POST /api/session| body: \path|{"password":"..."}|. Success204with Set-Cookie \path|ah_console|, HttpOnly, SameSite=Strict, Path=/, Max-Age default28800; no Secure flag. \path|GET /api/session| responds authenticated/configured; DELETE invalidates and expires the cookie. Missing hash503, wrong password401, lockout429with Retry-After; lockout follows five failures in five minutes and lasts one minute. Host or Origin denial403.\par
+All \path|/api/| requests require allowed Host/Origin; all except session routes require a session. Mutation confirmation is exactly \path|X-Arrowhead-Action: confirm|; absent confirmation428. This is not cryptographic replay protection or origin-port isolation.\par
+Rule creation body requires consumer, serviceInstanceId and positive integer priority. The adapter verifies producer availability and compatible consumer from registry data before forwarding. Successful create201; remove200with id/removed/at. Provider failures generally502with an error string; malformed rule JSON400.\par
+Plant mutations forward JSON to the inherited provider path; create201, updates200, delete200with removed id. Subscription writes respond providerSystem/updated/removed but do not forward any change. Lifecycle responds202with service/action/accepted/at, and only start/stop/restart on a static allowlisted project container is accepted.\par
+\section{Read response DTOs}
+Overview includes collectedAt, cloud, summary, devices, systems, services, registryManagement, naming, infrastructure, orchestrations, containers, history, registration and errors. Grouping includes devices/runtimeOnly and registered/deployed counts. Some flags and empty collections are synthetic, not verified state.\par
+Data view uses limit (default240,max1000), collectedAt/count/latest/entries/series; entries are flattened inherited historian data. Consumers returns localCloud/errors/rows with provider/definition/authorization/orchestration views; cloud labels are partly hard-coded TestCloud.\par
+SysMonitor view includes collectedAt, retentionDays, storedObservations, systems, selectedSystem and observations; the optional query is system. Subscription read returns defaultSubscription/providers/subscriptions/intake, with synthetic connected/providerFound values. Plant read returns entries/systems/services/registryError.\par
+Logs use service and tail query (default150,max500), returning service/lines/collectedAt. Runtime rows include id/name/service/displayName/image/state/status/health/created/managed. Logs may include any container returned by the Compose project filter, even when lifecycle management is disallowed.\par
+\section{Compatibility and release gates}
+This relocation intentionally preserves the latest located manager's business behavior. New changes are packaging (standalone nested module/role-specific launcher), embedded UI fallback, documentation and tests. This is not a security remediation or full Java-equivalence implementation.\par\medskip
+1. \path|PUT/DELETE /api/sysmonitor/subscriptions/{providerSystem}| currently checks confirmation and returns updated/removed flags without forwarding a write. Do not interpret this as applied configuration. This remains a release blocker.\par\medskip
+2. \path|/api/intercloud| returns a static unavailable/no-relay summary. It does not inspect Gatekeeper/GateTunnel. Consumer cloud labels include hard-coded TestCloud strings; no live foreign authorization catalogue is queried.\par\medskip
+3. Overview hard-codes registration/naming flags and leaves several collections empty. Subscription status hard-codes intake.connected=true/providerFound=false. These are display adapters, not authoritative readiness or security evidence.\par\medskip
+4. Historian, SysMonitor, plant and orchestration adapters target the inherited Go-cloud routes/shapes. They are not proven compatible with the newer generic Go support port or latest Java APIs. The standalone module must be qualified against the providers actually deployed.\par\medskip
+5. Console Host/Origin checks compare host names, not exact origins/ports. The \path|ah_console| cookie is not port-isolated and lacks Secure. Sessions/history are in-memory and reset on restart. Missing password disables APIs. Login lockout is global, five failures in five minutes then one-minute lockout; this is not comprehensive abuse protection.\par\medskip
+6. The manager API is dispatched before the shared application's token/management checks. Its boundary is console password/session plus the transport's mTLS if enabled, not a bearer-token-only API. Static assets and health have no console session requirement. A proxy must preserve this intended boundary.\par\medskip
+7. Authentication has explicit CN/profile pinning. Other provider clients use CA/SAN validation but do not generally pin expected provider CN. Do not claim universal authority-substitution resistance for this inherited code. Redirects are disabled. Optional CRLs reload for new connections only; omitted CRLs mean no revocation enforcement.\par\medskip
+8. Lifecycle uses the static systemToCompose service allowlist and Compose-project filtered container list; MANAGED\_SERVICES is not consumed by this implementation. Action is start/stop/restart only. Logs, however, can read any returned project container, not just the lifecycle allowlist. The raw Docker socket still confers broad daemon privilege: application checks are not a least-privilege socket boundary. Production needs a constrained proxy and deployment review.\par\medskip
+9. Shared runtime source includes other roles for compile-time dependencies and inherited tests. The dedicated executable refuses selecting those roles; they are not a second support-system deployment. No Docker socket or live state is needed by tests.\par\medskip
+10. Telemetry AMQP publisher has no durable local outbox; retries/reconnects do not establish exactly-once delivery. power=line/available and process health are generated status, not measurements of physical hardware. Registration is retried every20seconds; displayed registration flags are not confirmation. No real broker test is claimed here.\par\medskip
+11. Shared state is the inherited JSON format, not the newer support port's transactional state model. There is no new Java SQL migration, encryption-at-rest or multi-process ownership guarantee. Keep independent state and backups.\par\medskip
+12. Historical Markdown/SysML claims of three-way interchangeability are retained only under docs/legacy. The revised model and new SysD/SysDD/SD/IDD set distinguish intended common contracts from actual Go qualification.\par\medskip
+13. The shared serviceOperations helper generates POST/name metadata for localCloudManagement and the legacy monitor service, whereas actual handlers include GET/PUT/PATCH/DELETE and nested paths. Registration metadata is therefore not an authoritative HTTP contract. The new IDDs document actual handler methods/paths; correcting advertised metadata is separate functional work, not silently folded into relocation.\par\medskip
+Source relocation does not modify running containers or remove their deployment source. Before switching deployment build paths, close these gaps, qualify provider DTOs/policies, review Docker access, isolate browser trust domains, and test rollback.\par\medskip
+\section{References and verification}
+Authoritative moved code: LocalCloudManager/internal/cloud and embedded ui sources. Exact original/relocated SHA256 hashes are in docs/source-manifest.json. docs/legacy preserves the earlier local Markdown/SysML, not an endorsement of its parity claims. The revised SysML variability model is descriptive and has not been checked by a SysML parser. Executed checks and qualification limits are recorded in VERIFICATION.md. Source movement does not deploy or alter running clouds.
+\end{document}

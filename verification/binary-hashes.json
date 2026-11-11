@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Authentication",
+    "path": "ah5-core-go/authentication/bin/Authentication",
+    "sha256": "547e42b93c555f39d5fdfc51f883a6e982ab47b0c4ca83f17f1481017e44f1cd"
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "path": "ah5-core-go/consumer-authorization/bin/ConsumerAuthorization",
+    "sha256": "fe55fe4bc2aeda83ed788b406a3ee7adb72dd547b8b456c14c0a5c5145e61c36"
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-dynamic/bin/DynamicServiceOrchestration",
+    "sha256": "411f29014b2c651c3b51827f21318a9ae7c710c2cfdc1a54d39cfa729cf7f78e"
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-simple/bin/SimpleStoreServiceOrchestration",
+    "sha256": "094c897474a7c384c4d5ef1b424c09444e01908f0dc08f2873949814436a9fa8"
+  },
+  {
+    "name": "ServiceRegistry",
+    "path": "ah5-core-go/serviceregistry/bin/ServiceRegistry",
+    "sha256": "ce12daea44b074b39b0d7e387799f5cfd13d0fb0c7a3544bf21c3700e7c5d17e"
+  },
+  {
+    "name": "Blacklist",
+    "path": "ah5-Blacklist-go/bin/Blacklist",
+    "sha256": "e1ae570b617609dc81e94ac1e101102ea8f2bb59d8f451780abf3ecb64e15c71"
+  },
+  {
+    "name": "Configuration",
+    "path": "ah5-Configuration-go/bin/Configuration",
+    "sha256": "bc1f86fc94ea95d2593e70cbb3ff902e9584cddb8d335a8401ba83418871ff54"
+  },
+  {
+    "name": "DataManager",
+    "path": "ah5-DataManager-go/bin/DataManager",
+    "sha256": "f1bf614e5d28ed333dcc30deb52a6d7fa0d4764f68ae4600f224b5fe131bd084"
+  },
+  {
+    "name": "TimeManager",
+    "path": "ah5-TimeManager-go/bin/TimeManager",
+    "sha256": "e2caaad7c02418c95c301cf21b4015ae11b9028c826cd13898bd8ccbe728ccec"
+  },
+  {
+    "name": "EventHandler",
+    "path": "ah5-EventHandler-go/bin/EventHandler",
+    "sha256": "f0fec60ad9b5bf25d2ad3e9fe13c25e0cc5856aca966e8cb132bb208c511e8a4"
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "path": "ah5-DeviceQoSEvaluator-go/bin/DeviceQoSEvaluator",
+    "sha256": "b2f614f3173ea1d64e60a59f23958ffa97313028fa20c9f44c77398b41579263"
+  },
+  {
+    "name": "AIGym",
+    "path": "ah5-AIGym-go/bin/AIGym",
+    "sha256": "dc72270a15d42f7f4f0709adbe0efceaa9c016712d52df5111d2f8704ab17011"
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "path": "ah5-PlantDescriptionEngine-go/bin/PlantDescriptionEngine",
+    "sha256": "5ed79aae097bf8f454a26430ad8da2f9475398f6ae6bcf9c56a4ce0f0602cde1"
+  },
+  {
+    "name": "Choreographer",
+    "path": "ah5-Choreographer-go/bin/Choreographer",
+    "sha256": "14a2382e917bbbbf62ecf5336c407504982f591d01d8f2b12f39d74b4d384b43"
+  },
+  {
+    "name": "CertificateAuthority",
+    "path": "ah5-CertificateAuthority-go/bin/CertificateAuthority",
+    "sha256": "ade87dd11574b7ab0fcf53af04a76b6e3f986822eb23e6c3703df1ea10ddf408"
+  },
+  {
+    "name": "SysMonitor",
+    "path": "ah5-SysMonitor-go/bin/SysMonitor",
+    "sha256": "55a8b4c3633339471a28a18fc1345e7844491f828ec72bccc36361c1e7d0a590"
+  },
+  {
+    "name": "Onboarding",
+    "path": "ah5-Onboarding-go/bin/Onboarding",
+    "sha256": "0c827d4ab8a6d6bc666deab77e4ceada3dc697a687188e806019d94610063f48"
+  },
+  {
+    "name": "TestTranslation",
+    "path": "ah5-TestTranslation-go/bin/TestTranslation",
+    "sha256": "ba8c50d048a6279f8cd14156f2410fc39cef562551d8f61bd83653323368a9a2"
+  },
+  {
+    "name": "TranslationManager",
+    "path": "ah5-TranslationManager-go/bin/TranslationManager",
+    "sha256": "02c368a490aefb484d55023ad214cf9a6420be288dc9bd60008bd24de90296ed"
+  },
+  {
+    "name": "Gatekeeper",
+    "path": "ah5-Gatekeeper-go/bin/Gatekeeper",
+    "sha256": "899666fb1ccf6e9ae36b8ec15058e9aa95409047be56b91b79db40ac37b1de81"
+  },
+  {
+    "name": "GateTunnel",
+    "path": "ah5-GateTunnel-go/bin/GateTunnel",
+    "sha256": "3cdc6164e5271efca3dac2e62043ad76e302b51aae17f3e574fc11ca03a68655"
+  },
+  {
+    "name": "LocalCloudManager",
+    "path": "ah5-LocalCloudManager-go/bin/LocalCloudManager",
+    "sha256": "ff81c51f5fc4be9645142471b37f1819e3757a54044be4258eab83b00eeeaa0e"
+  }
+]

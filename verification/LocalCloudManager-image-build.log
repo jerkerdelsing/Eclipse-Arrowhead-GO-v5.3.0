@@ -1,0 +1,52 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 600B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/golang:1.27-alpine
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 93B done
+#3 DONE 0.0s
+
+#4 [build 1/6] FROM docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d
+#4 resolve docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 759.55kB 0.0s done
+#5 DONE 0.0s
+
+#6 [build 2/6] WORKDIR /src
+#6 CACHED
+
+#7 [build 3/6] COPY go.mod go.sum ./
+#7 DONE 0.0s
+
+#8 [build 4/6] RUN --mount=type=cache,target=/go/pkg/mod go mod download
+#8 DONE 0.1s
+
+#9 [build 5/6] COPY . .
+#9 DONE 0.1s
+
+#10 [build 6/6] RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build go build -trimpath -o /out/LocalCloudManager ./cmd/localcloudmanager
+#10 DONE 0.8s
+
+#11 [stage-1 1/1] COPY --from=build /out/LocalCloudManager /usr/local/bin/LocalCloudManager
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.3s done
+#12 exporting manifest sha256:4355bd118bb7d55f7af453d933a80f6aa3fabb781d056230f30cee69c28988ce
+#12 exporting manifest sha256:4355bd118bb7d55f7af453d933a80f6aa3fabb781d056230f30cee69c28988ce done
+#12 exporting config sha256:0a358a685408f64ea1bc55c856c959718edcab6bb3225ebddfbf93ec2c3129cc done
+#12 exporting attestation manifest sha256:bbafa11bbec4c4cb2aec68d77d97a9493138ea77f6f838691f17a4cc6f9ee0ab done
+#12 exporting manifest list sha256:0d4b152b9f88a9ae5913c347efc359767fe682c31e0e0b98436abd47e049fcb0 done
+#12 naming to docker.io/eclipse-arrowhead-go-reorg/localcloudmanager:20261028 done
+#12 unpacking to docker.io/eclipse-arrowhead-go-reorg/localcloudmanager:20261028 0.0s done
+#12 DONE 0.4s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/cumqg0ov9v29lzuss0y7i76yz

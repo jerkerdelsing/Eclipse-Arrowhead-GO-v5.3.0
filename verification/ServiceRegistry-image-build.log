@@ -1,0 +1,52 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 620B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/golang:1.27-alpine
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 93B done
+#3 DONE 0.0s
+
+#4 [build 1/6] FROM docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d
+#4 resolve docker.io/library/golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 307.40kB 0.0s done
+#5 DONE 0.0s
+
+#6 [build 2/6] WORKDIR /src
+#6 CACHED
+
+#7 [build 3/6] COPY go.mod go.sum ./
+#7 DONE 0.0s
+
+#8 [build 4/6] RUN --mount=type=cache,target=/go/pkg/mod go mod download
+#8 DONE 0.1s
+
+#9 [build 5/6] COPY . .
+#9 DONE 0.0s
+
+#10 [build 6/6] RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build go build -trimpath -o /out/ServiceRegistry .
+#10 DONE 0.9s
+
+#11 [stage-1 1/1] COPY --from=build /out/ServiceRegistry /usr/local/bin/ServiceRegistry
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.4s done
+#12 exporting manifest sha256:30f19e37e6f74aa55bd930524c0e283208c128390313d8fee5a0a7528187169d
+#12 exporting manifest sha256:30f19e37e6f74aa55bd930524c0e283208c128390313d8fee5a0a7528187169d 0.0s done
+#12 exporting config sha256:cc7f78a375d62713db3c08c4b4e173440e4f1c842c0cb9c2559f3b10d7a7eb56 done
+#12 exporting attestation manifest sha256:08bb9052dca9cc40cfc9159596c5e2960c3f10f320342cc09dcfdd2f9d56c190 0.0s done
+#12 exporting manifest list sha256:5e72b5517a1d2579df09ef45db5cd0e43a9191cbec5886d6105a1588dd82c585 done
+#12 naming to docker.io/eclipse-arrowhead-go-reorg/serviceregistry:20261028 done
+#12 unpacking to docker.io/eclipse-arrowhead-go-reorg/serviceregistry:20261028 0.1s done
+#12 DONE 0.6s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/5rafra4s7ajfp3o13bea7jekg

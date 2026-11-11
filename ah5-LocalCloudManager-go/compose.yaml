@@ -1,0 +1,38 @@
+# Standalone service template; join the target cloud network via ARROWHEAD_NETWORK.
+services:
+  system:
+    image: eclipse-arrowhead/localcloudmanager-go:5.2.2
+    build:
+      context: .
+    user: "${ARROWHEAD_UID:?Run make prepare}:${ARROWHEAD_GID:?Run make prepare}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: [/tmp]
+    ports:
+      - "127.0.0.1:${HOST_PORT:-8480}:8480"
+    environment:
+      SYSTEM_NAME: LocalCloudManager
+      LOCAL_CLOUD: GoCloud
+      ORGANIZATION: Company
+      SERVER_PORT: '8480'
+      TLS_SERVER_CERT: /certs/system.pem
+      TLS_SERVER_KEY: /certs/system.key
+      TLS_CA_CERT: /certs/trust.pem
+      DATA_FILE: /state/localcloudmanager.json
+      AUTHENTICATION_URL: ${AUTHENTICATION_URL:-https://authentication:8444}
+      AUTHENTICATION_PASSWORD: ${AUTHENTICATION_PASSWORD:?Set the provisioned LocalCloudManager identity password}
+      SERVICE_REGISTRY_URL: ${SERVICE_REGISTRY_URL:-https://serviceregistry:8443}
+      CONSOLE_PASSWORD_HASH: ${CONSOLE_PASSWORD_HASH:?Set the existing provisioned scrypt console hash}
+    volumes:
+      - ./config:/config:ro
+      - ./certs:/certs:ro
+      - ./secrets:/secrets:ro
+      - ./state:/state
+    networks:
+      arrowhead:
+        aliases: [localcloudmanager]
+networks:
+  arrowhead:
+    external: true
+    name: ${ARROWHEAD_NETWORK:?Set the existing target cloud network}

@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Authentication",
+    "path": "ah5-core-go/authentication",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 2.42,
+    "log": "verification/Authentication-build.log"
+  },
+  {
+    "name": "ConsumerAuthorization",
+    "path": "ah5-core-go/consumer-authorization",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 2.42,
+    "log": "verification/ConsumerAuthorization-build.log"
+  },
+  {
+    "name": "DynamicServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-dynamic",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 0.93,
+    "log": "verification/DynamicServiceOrchestration-build.log"
+  },
+  {
+    "name": "SimpleStoreServiceOrchestration",
+    "path": "ah5-core-go/serviceorchestration-simple",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 0.94,
+    "log": "verification/SimpleStoreServiceOrchestration-build.log"
+  },
+  {
+    "name": "ServiceRegistry",
+    "path": "ah5-core-go/serviceregistry",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 0.98,
+    "log": "verification/ServiceRegistry-build.log"
+  },
+  {
+    "name": "Blacklist",
+    "path": "ah5-Blacklist-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.45,
+    "log": "verification/Blacklist-build.log"
+  },
+  {
+    "name": "Configuration",
+    "path": "ah5-Configuration-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.28,
+    "log": "verification/Configuration-build.log"
+  },
+  {
+    "name": "DataManager",
+    "path": "ah5-DataManager-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.41,
+    "log": "verification/DataManager-build.log"
+  },
+  {
+    "name": "TimeManager",
+    "path": "ah5-TimeManager-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.28,
+    "log": "verification/TimeManager-build.log"
+  },
+  {
+    "name": "EventHandler",
+    "path": "ah5-EventHandler-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.22,
+    "log": "verification/EventHandler-build.log"
+  },
+  {
+    "name": "DeviceQoSEvaluator",
+    "path": "ah5-DeviceQoSEvaluator-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.26,
+    "log": "verification/DeviceQoSEvaluator-build.log"
+  },
+  {
+    "name": "AIGym",
+    "path": "ah5-AIGym-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.44,
+    "log": "verification/AIGym-build.log"
+  },
+  {
+    "name": "PlantDescriptionEngine",
+    "path": "ah5-PlantDescriptionEngine-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.24,
+    "log": "verification/PlantDescriptionEngine-build.log"
+  },
+  {
+    "name": "Choreographer",
+    "path": "ah5-Choreographer-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.34,
+    "log": "verification/Choreographer-build.log"
+  },
+  {
+    "name": "CertificateAuthority",
+    "path": "ah5-CertificateAuthority-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.41,
+    "log": "verification/CertificateAuthority-build.log"
+  },
+  {
+    "name": "SysMonitor",
+    "path": "ah5-SysMonitor-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.28,
+    "log": "verification/SysMonitor-build.log"
+  },
+  {
+    "name": "Onboarding",
+    "path": "ah5-Onboarding-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.24,
+    "log": "verification/Onboarding-build.log"
+  },
+  {
+    "name": "TestTranslation",
+    "path": "ah5-TestTranslation-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.38,
+    "log": "verification/TestTranslation-build.log"
+  },
+  {
+    "name": "TranslationManager",
+    "path": "ah5-TranslationManager-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.27,
+    "log": "verification/TranslationManager-build.log"
+  },
+  {
+    "name": "Gatekeeper",
+    "path": "ah5-Gatekeeper-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.22,
+    "log": "verification/Gatekeeper-build.log"
+  },
+  {
+    "name": "GateTunnel",
+    "path": "ah5-GateTunnel-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 1.27,
+    "log": "verification/GateTunnel-build.log"
+  },
+  {
+    "name": "LocalCloudManager",
+    "path": "ah5-LocalCloudManager-go",
+    "action": "build",
+    "exitCode": 0,
+    "seconds": 0.91,
+    "log": "verification/LocalCloudManager-build.log"
+  }
+]

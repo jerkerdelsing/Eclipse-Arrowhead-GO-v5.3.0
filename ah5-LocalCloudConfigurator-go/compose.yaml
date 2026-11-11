@@ -1,0 +1,3 @@
+# Standalone deployment template: the ColonyOS stack with the configurator API (see DEPLOYMENT.md).
+include:
+  - deploy/colonyos/compose.yaml

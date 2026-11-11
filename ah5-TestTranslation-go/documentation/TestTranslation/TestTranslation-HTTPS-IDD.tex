@@ -1,0 +1,43 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{document}
+\ArrowheadTitle{TestTranslation HTTPS / Go}
+\ArrowheadType{Interface Design Description}
+\ArrowheadTypeShort{IDD}
+\ArrowheadVersion{5.2.2}
+\ArrowheadDate{2026-10-24}
+\ArrowheadAuthor{Implementation working draft}
+\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Repository maintainers}
+\ArrowheadFooter{Eclipse Arrowhead -- native Go support implementations}
+\ArrowheadSetup
+\section{Interface overview}
+HTTPS with mandatory mutual TLS and JSON documents (bridge calls carry the target's media types). Management services need an identity token (\texttt{Bearer IDENTITY-TOKEN//<token>}) bound to the client certificate; bridges need \texttt{Bearer TRANSLATION-BRIDGE-TOKEN//<bridgeId>}. Errors contain errorMessage, errorCode, origin and timestamp. Request bodies are limited to 1 MiB.
+\subsection{HTTPS interface operations}
+\begin{longtable}{p{0.12\textwidth}p{0.63\textwidth}p{0.18\textwidth}}\toprule
+Method & Path & Access\\\midrule\endhead
+\texttt{POST} & \path{/testtranslation/interface-bridge/check-targets} & identity\\
+\texttt{POST} & \path{/testtranslation/interface-bridge/initialize-bridge} & identity\\
+\texttt{DELETE} & \path{/testtranslation/interface-bridge/abort-bridge/{bridgeId}} & identity\\
+\texttt{POST} & \path{/testtranslation/data-model/init-translation} & identity\\
+\texttt{GET} & \path{/testtranslation/data-model/get-translation-result/{translationId}} & identity\\
+\texttt{DELETE} & \path{/testtranslation/data-model/abort-translation/{translationId}} & identity\\
+any & \path{/testtranslation/bridge/{bridgeId}/{operation path}} & bridge token\\
+\texttt{GET} & \path{/testtranslation/monitor/echo} & certificate\\
+\texttt{GET} & \path{/testtranslation/general/mgmt/get-config} & management\\
+\texttt{POST} & \path{/testtranslation/general/mgmt/logs} & management\\
+\bottomrule\end{longtable}
+\subsection{Bridge responses}
+Status codes of the target are passed through. 401: missing or wrong bridge token; 403: method or path outside the negotiated operation; 404: unknown or ended bridge; 502: target unreachable or translation failed.
+\subsection{Important delimitations}
+TestTranslation is a test application system for the TranslationManager, not a production translator.
+\begin{itemize}
+\item One bridge kind: \texttt{generic\_https} to \texttt{generic\_https}, one negotiated operation per bridge; targets with \texttt{CERT\_AUTH} or \texttt{NONE} policies (authorization tokens for token-protected targets are not presented).
+\item Data models \texttt{simpleJson} and \texttt{senml} only; translations are synchronous (a task is \texttt{DONE} or \texttt{ERROR} when \texttt{init-translation} returns).
+\item Bridges are kept in the system's JSON state; translation tasks only in memory (latest 1000).
+\end{itemize}
+\end{document}

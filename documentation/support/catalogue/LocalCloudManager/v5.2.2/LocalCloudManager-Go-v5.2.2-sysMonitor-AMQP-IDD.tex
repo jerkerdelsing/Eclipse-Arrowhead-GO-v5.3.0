@@ -1,0 +1,21 @@
+\documentclass[a4paper]{arrowhead}
+\usepackage[T1]{fontenc}
+\usepackage{longtable,booktabs,xurl,enumitem}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{nosep,leftmargin=*}
+\begin{document}
+\ArrowheadTitle{LocalCloudManager / sysMonitor-AMQP-IDD (Go)}\ArrowheadType{Interface Design Description}\ArrowheadTypeShort{Go}
+\ArrowheadVersion{1.0.0}\ArrowheadDate{2026-10-17}
+\ArrowheadAuthor{Eclipse Arrowhead migration project}\ArrowheadStatus{DEVELOPMENT}
+\ArrowheadContact{Project maintainers}\ArrowheadFooter{Eclipse Arrowhead -- Go LocalCloudManager -- EPL-2.0}
+\ArrowheadSetup
+\section{AMQPS binding}
+AMQP0-9-1 overTLS, interface \path|generic_amqps|, policy CERT\_AUTH. Broker AMQP\_HOST/AMQP\_PORT defaultamqp-broker:5671; SASL EXTERNAL with LocalCloudManager service certificate. Exchange \path|arrowhead|, routing \path|<Cloud>.sysmonitor.LocalCloudManager.LocalCloudManager.<observationType>|. Operations/types \path|echo|, \path|power|, \path|status|; content type application/json, delivery mode persistent, publisher confirm with a10second wait bound. Configure broker SANs, trust, exchange and ACLs independently.
+\section{Observation schema}
+Envelope fields: schemaVersion1.0, observationId, providerSystem, serviceInstance, observationType, sourceTime (UTC-Z), sequence, value, quality, metadata. metadata contains publisherMode=native and implementation=go. Non-echo observations include unit1.\par
+Echo value: status=alive, uptimeSeconds, detail. Power: supplyType=line, state=available. Status: state=running, health=healthy, serviceCount. These values do not establish provider readiness or physical supply state.\par
+Registry metadata contract SysMonitor-AMQP-IDD-5.2.2, schemaVersion1.0, publisherMode native, observationTypes array and delivery persistent/publisher-confirmed. baseRoutingKey is \path|cloud.sysmonitor.LocalCloudManager.LocalCloudManager|. No plaintext AMQP fallback is provided by this publisher.\par
+\section{References and verification}
+Authoritative moved code: LocalCloudManager/internal/cloud and embedded ui sources. Exact original/relocated SHA256 hashes are in docs/source-manifest.json. docs/legacy preserves the earlier local Markdown/SysML, not an endorsement of its parity claims. The revised SysML variability model is descriptive and has not been checked by a SysML parser. Executed checks and qualification limits are recorded in VERIFICATION.md. Source movement does not deploy or alter running clouds.
+\end{document}
