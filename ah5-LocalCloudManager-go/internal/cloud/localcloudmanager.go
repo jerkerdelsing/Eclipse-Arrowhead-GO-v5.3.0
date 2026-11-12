@@ -388,7 +388,7 @@ func (a *App) managerConsumers() (map[string]any, error) {
 		for _, raw := range anySlice(rules["rules"]) {
 			rule := object(raw)
 			id := mapString(rule["serviceInstanceId"])
-			byInstance[id] = append(byInstance[id], map[string]any{"consumer": rule["consumer"], "consumerCloud": "TestCloud", "via": fmt.Sprintf("SimpleStore rule (priority %v)", rule["priority"])})
+			byInstance[id] = append(byInstance[id], map[string]any{"consumer": rule["consumer"], "consumerCloud": a.Config.Cloud, "via": fmt.Sprintf("SimpleStore rule (priority %v)", rule["priority"])})
 		}
 	}
 	rows := []any{}
@@ -397,72 +397,19 @@ func (a *App) managerConsumers() (map[string]any, error) {
 		provider := mapString(object(service["provider"])["name"])
 		definition := mapString(object(service["serviceDefinition"])["name"])
 		id := mapString(service["instanceId"])
-		rows = append(rows, map[string]any{"provider": provider, "serviceDefinition": definition, "providerCloud": "TestCloud", "authorized": []any{}, "orchestrated": byInstance[id]})
+		rows = append(rows, map[string]any{"provider": provider, "serviceDefinition": definition, "providerCloud": a.Config.Cloud, "authorized": []any{}, "orchestrated": byInstance[id]})
 	}
 	errs := []any{}
 	if rulesErr != nil {
 		errs = append(errs, rulesErr.Error())
 	}
-	return map[string]any{"collectedAt": now(), "localCloud": "TestCloud", "errors": errs, "rows": rows}, nil
+	return map[string]any{"collectedAt": now(), "localCloud": a.Config.Cloud, "errors": errs, "rows": rows}, nil
 }
 
 func (a *App) managerIntercloud() map[string]any {
-	return map[string]any{"collectedAt": now(), "localCloud": "TestCloud", "neighbourClouds": []any{}, "neighbourError": nil, "relay": map[string]any{"gatekeeper": map[string]any{"connected": false, "error": "No relay configured"}, "gatetunnel": map[string]any{"connected": false, "error": "No relay configured"}}, "sessions": map[string]any{"consumerSessions": 0, "providerSessions": 0, "sessions": []any{}}, "producer": map[string]any{"status": "unavailable", "lastError": "No inter-cloud producer configured"}}
+	return map[string]any{"collectedAt": now(), "localCloud": a.Config.Cloud, "neighbourClouds": []any{}, "neighbourError": nil, "relay": map[string]any{"gatekeeper": map[string]any{"connected": false, "error": "No relay configured"}, "gatetunnel": map[string]any{"connected": false, "error": "No relay configured"}}, "sessions": map[string]any{"consumerSessions": 0, "providerSessions": 0, "sessions": []any{}}, "producer": map[string]any{"status": "unavailable", "lastError": "No inter-cloud producer configured"}}
 }
 
-func (a *App) managerSysMonitor(r *http.Request) (map[string]any, error) {
-	payload, err := a.managerJSON(http.MethodGet, env("SYSMONITOR_URL", "http://sysmonitor:8475")+"/sysmonitor/data", nil)
-	if err != nil {
-		return nil, err
-	}
-	records := entries(payload)
-	grouped := map[string][]map[string]any{}
-	for _, raw := range records {
-		item := object(raw)
-		system := mapString(item["sourceSystemName"])
-		if system == "" {
-			system = mapString(item["systemName"])
-		}
-		if system == "" {
-			system = "Unknown"
-		}
-		grouped[system] = append(grouped[system], item)
-	}
-	systems := []any{}
-	selected := r.URL.Query().Get("system")
-	names := make([]string, 0, len(grouped))
-	for name := range grouped {
-		names = append(names, name)
-	}
-	sort.Strings(names)
-	if selected == "" && len(names) > 0 {
-		selected = names[0]
-	}
-	observations := []any{}
-	for _, name := range names {
-		list := grouped[name]
-		latest := map[string]any{}
-		last := ""
-		for _, item := range list {
-			typ := mapString(item["observationType"])
-			if typ == "" {
-				typ = "status"
-			}
-			source := mapString(item["sourceTime"])
-			if source == "" {
-				source = mapString(item["receivedAt"])
-			}
-			obs := map[string]any{"observationType": typ, "sourceTime": source, "value": item["value"], "quality": item["quality"]}
-			latest[typ] = obs
-			last = source
-			if name == selected {
-				observations = append(observations, obs)
-			}
-		}
-		systems = append(systems, map[string]any{"systemName": name, "observationCount": len(list), "lastObservationTime": last, "latest": latest})
-	}
-	return map[string]any{"collectedAt": now(), "retentionDays": nil, "storedObservations": len(records), "systems": systems, "selectedSystem": selected, "observations": reverseAny(observations)}, nil
-}
 
 func (a *App) managerSysMonitorSubscriptions() (map[string]any, error) {
 	payload, err := a.managerJSON(http.MethodGet, env("SYSMONITOR_URL", "http://sysmonitor:8475")+"/sysmonitor/management/subscriptions", nil)
@@ -483,7 +430,7 @@ func (a *App) managerSysMonitorSubscriptions() (map[string]any, error) {
 }
 
 func (a *App) managerPlantDescriptions() (map[string]any, error) {
-	payload, err := a.managerJSON(http.MethodGet, env("PLANT_DESCRIPTION_ENGINE_URL", "http://plantdescriptionengine:8432")+"/plant-description-engine", nil)
+	payload, err := a.managerJSON(http.MethodGet, env("PLANT_DESCRIPTION_ENGINE_URL", "http://plantdescriptionengine:8432")+"/plantdescriptionengine/mgmt/plant-descriptions", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -531,7 +478,7 @@ func (a *App) managerPlantMutation(r *http.Request) (map[string]any, int, error)
 		}
 	}
 	id := strings.TrimPrefix(r.URL.Path, "/api/plantdescriptions/")
-	endpoint := env("PLANT_DESCRIPTION_ENGINE_URL", "http://plantdescriptionengine:8432") + "/plant-description-engine"
+	endpoint := env("PLANT_DESCRIPTION_ENGINE_URL", "http://plantdescriptionengine:8432") + "/plantdescriptionengine/mgmt/plant-descriptions"
 	if id != "" && id != "/api/plantdescriptions" {
 		endpoint += "/" + url.PathEscape(id)
 	}
@@ -552,17 +499,6 @@ func (a *App) managerPlantMutation(r *http.Request) (map[string]any, int, error)
 	return payload, status, nil
 }
 
-func (a *App) registryQuery(resource string) (map[string]any, error) {
-	b, err := a.call(http.MethodPost, a.Config.RegistryURL+"/serviceregistry/mgmt/"+resource+"/query", map[string]any{}, map[string]string{"Authorization": "Bearer SYSTEM//" + a.Config.SystemName})
-	if err != nil {
-		return nil, err
-	}
-	var out map[string]any
-	if err := json.Unmarshal(b, &out); err != nil {
-		return nil, err
-	}
-	return out, nil
-}
 
 func entries(payload map[string]any) []any { v, _ := payload["entries"].([]any); return v }
 func object(v any) map[string]any          { m, _ := v.(map[string]any); return m }
@@ -677,52 +613,6 @@ func buildGoRegistryManagement(systems, services []any, containers []runtimeCont
 	return map[string]any{"devices": []any{device}, "runtimeOnly": runtimeOnly, "summary": map[string]any{"registeredDevices": 0, "deployedDevices": 0, "registeredSystems": len(systems), "deployedSystems": deployedSystems, "registeredServices": len(services), "deployedServices": deployedServices, "runtimeOnly": len(runtimeOnly)}}
 }
 
-func (a *App) managerData(r *http.Request) (map[string]any, error) {
-	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
-	if limit < 1 {
-		limit = 240
-	}
-	if limit > 1000 {
-		limit = 1000
-	}
-	b, err := a.call(http.MethodGet, env("DATAMANAGER_URL", "http://datamanager:8461")+"/datamanager/historian", nil, map[string]string{"Authorization": "Bearer SYSTEM//" + a.Config.SystemName})
-	if err != nil {
-		return nil, err
-	}
-	var raw map[string]any
-	if err := json.Unmarshal(b, &raw); err != nil {
-		return nil, err
-	}
-	flat := []any{}
-	for _, recordRaw := range entries(raw) {
-		record := object(recordRaw)
-		data, ok := record["data"].([]any)
-		if !ok {
-			continue
-		}
-		for _, datumRaw := range data {
-			datum := cloneMap(object(datumRaw))
-			if datum["name"] == nil {
-				datum["name"] = datum["n"]
-			}
-			if datum["unit"] == nil {
-				datum["unit"] = datum["u"]
-			}
-			if datum["time"] == nil {
-				datum["time"] = time.Now().Unix()
-			}
-			if datum["value"] == nil {
-				datum["value"] = map[string]any{"v": datum["v"], "vs": datum["vs"], "vb": datum["vb"]}
-			}
-			flat = append(flat, datum)
-		}
-	}
-	if len(flat) > limit {
-		flat = flat[len(flat)-limit:]
-	}
-	series := dataSeries(flat)
-	return map[string]any{"collectedAt": now(), "count": len(flat), "latest": []any{}, "entries": reverseAny(flat), "series": series}, nil
-}
 
 func dataSeries(values []any) []any {
 	byName := map[string][]any{}
