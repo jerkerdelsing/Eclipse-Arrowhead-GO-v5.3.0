@@ -4,3 +4,14 @@
 **/secrets/
 **/.env
 .DS_Store
+
+# LaTeX build byproducts (documents are built with latexmk)
+*.aux
+*.fls
+*.fdb_latexmk
+*.toc
+*.out
+*.blg
+*.synctex.gz
+# LaTeX logs of the generated documents (verification logs stay tracked)
+**/documentation/**/*.log
