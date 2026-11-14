@@ -48,7 +48,7 @@ func (a *App) registryHTTP(w http.ResponseWriter, r *http.Request) {
 	case r.Method == http.MethodPost && r.URL.Path == "/serviceregistry/mgmt/service-definitions/query":
 		a.queryDefinitions(w)
 	case r.Method == http.MethodGet && r.URL.Path == "/serviceregistry/general/mgmt/config":
-		jsonOut(w, 200, map[string]any{"systemName": a.Config.SystemName, "version": "5.2.2", "implementation": "go"})
+		jsonOut(w, 200, map[string]any{"systemName": a.Config.SystemName, "version": "5.4.0", "implementation": "go"})
 	default:
 		apiError(w, 404, "No such ServiceRegistry operation", r.URL.Path)
 	}

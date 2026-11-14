@@ -1,7 +1,7 @@
 # Standalone service template; join the target cloud network via ARROWHEAD_NETWORK.
 services:
   system:
-    image: eclipse-arrowhead/configuration-go:5.2.2
+    image: eclipse-arrowhead/configuration-go:5.4.0
     build:
       context: .
     user: "${ARROWHEAD_UID:?Run make prepare}:${ARROWHEAD_GID:?Run make prepare}"

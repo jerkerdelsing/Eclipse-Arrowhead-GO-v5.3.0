@@ -563,7 +563,7 @@ func (a *App) managerOverview() (map[string]any, error) {
 	managerHistoryMu.Unlock()
 	registry := buildGoRegistryManagement(systems, services, containers)
 	return map[string]any{
-		"collectedAt": collected, "cloud": map[string]any{"name": env("COMPOSE_PROJECT_NAME", "arrowhead-v52-test-cloud-go"), "release": "5.2.2", "implementation": "go", "registryReachable": registryErr == nil && serviceErr == nil, "dockerReachable": dockerErr == nil},
+		"collectedAt": collected, "cloud": map[string]any{"name": env("COMPOSE_PROJECT_NAME", "arrowhead-v52-test-cloud-go"), "release": "5.4.0", "implementation": "go", "registryReachable": registryErr == nil && serviceErr == nil, "dockerReachable": dockerErr == nil},
 		"summary": sample, "devices": []any{}, "systems": systems, "services": services, "registryManagement": registry,
 		"naming": map[string]any{"valid": true, "violations": []any{}}, "infrastructure": []any{}, "orchestrations": []any{}, "containers": containerMaps(containers), "history": history,
 		"registration": map[string]any{"registered": true, "instanceId": "LocalCloudManager|localCloudManagement|1.0.0", "error": nil, "checkedAt": collected},

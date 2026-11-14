@@ -166,7 +166,7 @@ func (a *App) aiGymStatus(inventory Document) Document {
 		status = "running"
 	}
 	amqpBroker, amqpPort, _ := a.amqpHostPort()
-	return Document{"status": status, "system": a.Config.Name, "implementation": "Go", "arrowheadVersion": "5.2.2", "models": inventory, "time": now(),
+	return Document{"status": status, "system": a.Config.Name, "implementation": "Go", "arrowheadVersion": "5.4.0", "models": inventory, "time": now(),
 		"registration":   Document{"registered": g.registered, "error": g.registrationErr},
 		"mqtt":           Document{"connected": connected, "broker": g.broker},
 		"amqp":           Document{"broker": net.JoinHostPort(amqpBroker, strconv.Itoa(amqpPort)), "exchange": "arrowhead", "routingKey": a.monitorBaseRoutingKey()},

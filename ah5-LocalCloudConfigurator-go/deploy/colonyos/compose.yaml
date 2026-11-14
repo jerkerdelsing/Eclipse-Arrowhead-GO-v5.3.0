@@ -58,7 +58,7 @@ services:
     ports: ["127.0.0.1:50080:50080"]
 
   localcloudconfigurator:
-    image: eclipse-arrowhead/localcloudconfigurator-go:5.2.2
+    image: eclipse-arrowhead/localcloudconfigurator-go:5.4.0
     build: { context: ../.. }
     restart: unless-stopped
     depends_on: [colonies-server]

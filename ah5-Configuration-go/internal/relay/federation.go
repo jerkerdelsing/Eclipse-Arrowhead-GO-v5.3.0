@@ -143,7 +143,7 @@ func (f *Federation) Status() map[string]any {
 			list = append(list, map[string]any{"sessionId": s.ID, "side": side.name, "consumer": s.Consumer, "consumerCloud": s.ConsumerCloud, "provider": s.Provider, "providerCloud": s.ProviderCloud, "serviceDefinition": s.Definition, "requests": s.Requests, "createdAt": float64(s.Created.Unix()), "state": "ACTIVE", "tunnelPort": s.Port})
 		}
 	}
-	return map[string]any{"status": "ok", "system": f.app.Config.SystemName, "version": "5.2.2", "implementation": "go", "x509": true, "relay": map[string]any{"connected": f.client.IsConnectionOpen(), "broker": env("RELAY_HOST", "arrowhead-relay") + ":" + env("RELAY_PORT", "8883"), "profile": env("FEDERATION_PROFILE", "legacy-mtls"), "endToEndEncrypted": f.e2e}, "interCloud": map[string]any{"providerSessions": len(f.providers), "consumerSessions": len(f.consumers), "sessions": list}}
+	return map[string]any{"status": "ok", "system": f.app.Config.SystemName, "version": "5.4.0", "implementation": "go", "x509": true, "relay": map[string]any{"connected": f.client.IsConnectionOpen(), "broker": env("RELAY_HOST", "arrowhead-relay") + ":" + env("RELAY_PORT", "8883"), "profile": env("FEDERATION_PROFILE", "legacy-mtls"), "endToEndEncrypted": f.e2e}, "interCloud": map[string]any{"providerSessions": len(f.providers), "consumerSessions": len(f.consumers), "sessions": list}}
 }
 func (f *Federation) expire() {
 	f.mu.Lock()

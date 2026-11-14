@@ -22,7 +22,7 @@ import (
 
 const (
 	systemName     = "ServiceRegistry"
-	systemVersion  = "5.2.2"
+	systemVersion  = "5.4.0"
 	serviceVersion = "1.0.0"
 )
 

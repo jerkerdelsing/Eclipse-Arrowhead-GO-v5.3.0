@@ -1,6 +1,6 @@
 GO ?= go
 DOCKER ?= docker
-IMAGE ?= eclipse-arrowhead/localcloudconfigurator-go:5.2.2
+IMAGE ?= eclipse-arrowhead/localcloudconfigurator-go:5.4.0
 CLOUD_DIR ?= ../../Arrowhead/Arrowhead-test-cloud-go
 CATALOG ?= catalogs/gocloud.json
 COLONY ?= arrowhead

@@ -1,6 +1,6 @@
 GO ?= go
 DOCKER ?= docker
-IMAGE ?= eclipse-arrowhead/onboarding-go:5.2.2
+IMAGE ?= eclipse-arrowhead/onboarding-go:5.4.0
 .PHONY: build test vet image prepare run clean
 build:
 	mkdir -p bin

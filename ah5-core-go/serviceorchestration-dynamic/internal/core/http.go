@@ -365,7 +365,7 @@ func (a *App) commonRoutes() {
 		return textResponse("Got it!"), 200, nil
 	})
 	a.route("GET", a.base()+"/general/mgmt/get-config", "management", func(w http.ResponseWriter, r *http.Request) (any, int, error) {
-		values := Document{"implementation": "Go", "version": "5.2.2", "role": a.Config.Role, "system.name": a.Config.Name, "server.ssl.enabled": "true", "server.ssl.client-auth": "need", "persistence": "atomic-json"}
+		values := Document{"implementation": "Go", "version": "5.4.0", "role": a.Config.Role, "system.name": a.Config.Name, "server.ssl.enabled": "true", "server.ssl.client-auth": "need", "persistence": "atomic-json"}
 		keys := r.URL.Query()["keys"]
 		if len(keys) > 0 {
 			selected := Document{}

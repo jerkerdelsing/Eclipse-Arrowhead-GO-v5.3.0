@@ -448,7 +448,7 @@ func (a *App) certificateHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) runtimeConfig() map[string]any {
-	return map[string]any{"role": a.Config.Role, "systemName": a.Config.SystemName, "port": a.Config.Port, "version": "5.2.2", "implementation": "go"}
+	return map[string]any{"role": a.Config.Role, "systemName": a.Config.SystemName, "port": a.Config.Port, "version": "5.4.0", "implementation": "go"}
 }
 
 func (a *App) createResource(w http.ResponseWriter, r *http.Request, kind string) {
@@ -540,7 +540,7 @@ func number(v any) (float64, bool) {
 	}
 }
 func fmtStatus(name string) map[string]any {
-	return map[string]any{"systemName": name, "status": "AVAILABLE", "version": "5.2.2", "implementation": "go", "timestamp": now()}
+	return map[string]any{"systemName": name, "status": "AVAILABLE", "version": "5.4.0", "implementation": "go", "timestamp": now()}
 }
 func keyFromPath(p string) string {
 	parts := strings.Split(strings.Trim(p, "/"), "/")

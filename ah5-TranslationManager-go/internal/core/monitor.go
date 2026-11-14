@@ -337,5 +337,5 @@ func (a *App) monitorStatus() Document {
 	if a.broker.amqpConnected.Load() && a.broker.mqttConnected.Load() && len(a.rows("monitorProviders")) > 0 {
 		status = "running"
 	}
-	return Document{"system": "SysMonitor", "implementation": "Go", "status": status, "version": "5.2.2", "defaultSubscription": a.Config.DefaultSubscription, "providers": a.rows("monitorProviders"), "subscriptions": a.rows("monitorSubscriptions"), "storage": Document{"stored": a.Store.Count("observations"), "pending": a.Store.Count("outbox"), "retentionDays": a.Config.RetentionDays}, "amqp": Document{"connected": a.broker.amqpConnected.Load()}, "mqtt": Document{"connected": a.broker.mqttConnected.Load()}}
+	return Document{"system": "SysMonitor", "implementation": "Go", "status": status, "version": "5.4.0", "defaultSubscription": a.Config.DefaultSubscription, "providers": a.rows("monitorProviders"), "subscriptions": a.rows("monitorSubscriptions"), "storage": Document{"stored": a.Store.Count("observations"), "pending": a.Store.Count("outbox"), "retentionDays": a.Config.RetentionDays}, "amqp": Document{"connected": a.broker.amqpConnected.Load()}, "mqtt": Document{"connected": a.broker.mqttConnected.Load()}}
 }

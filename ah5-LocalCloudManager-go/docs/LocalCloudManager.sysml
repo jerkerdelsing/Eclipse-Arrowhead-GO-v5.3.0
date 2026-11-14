@@ -11,7 +11,7 @@ package LocalCloudManagerImplementations {
         port sysMonitor : SysMonitorPublisherPort;
         port providers : ~ProviderClientPort;
         port runtime : ~RuntimeControlPort;
-        attribute systemVersion : String = "5.2.2";
+        attribute systemVersion : String = "5.4.0";
         attribute serviceVersion : String = "1.0.0";
     }
     part def JavaCloudManager :> LocalCloudManagerContract {

@@ -243,7 +243,7 @@ func (a *App) registrationLoop() {
 func (a *App) register() error {
 	spec := roleSpecs[a.Config.Role]
 	headers := map[string]string{"Authorization": "Bearer SYSTEM//" + a.Config.SystemName}
-	sys := map[string]any{"version": "5.2.2", "addresses": []string{a.Config.Domain}, "metadata": map[string]any{"implementation": "go", "role": a.Config.Role}}
+	sys := map[string]any{"version": "5.4.0", "addresses": []string{a.Config.Domain}, "metadata": map[string]any{"implementation": "go", "role": a.Config.Role}}
 	if a.federation != nil {
 		if a.Config.Role == "gatekeeper" {
 			sys["metadata"] = map[string]any{"role": "inter-cloud-gatekeeper", "sourceCompatibility": "4.6.2"}
@@ -364,7 +364,7 @@ func (a *App) rawCall(method, url string, body any, headers map[string]string) (
 
 func (a *App) upsertLocalRegistrationLocked(spec RoleSpec) {
 	t := now()
-	sys := System{Name: spec.SystemName, Metadata: map[string]any{"implementation": "go"}, Version: "5.2.2", Addresses: []Address{{Type: "HOSTNAME", Address: a.Config.Domain}}, CreatedAt: t, UpdatedAt: t}
+	sys := System{Name: spec.SystemName, Metadata: map[string]any{"implementation": "go"}, Version: "5.4.0", Addresses: []Address{{Type: "HOSTNAME", Address: a.Config.Domain}}, CreatedAt: t, UpdatedAt: t}
 	a.Store.Data.Systems[sys.Name] = sys
 	for _, ss := range spec.Services {
 		d := Definition{Name: ss.Definition, CreatedAt: t, UpdatedAt: t}

@@ -235,7 +235,7 @@ func (a *App) Register(ctx context.Context) error {
 	if a.Config.AdvertiseAddress == "" || a.Config.AdvertisePort < 1 || a.Config.AdvertisePort > 65535 {
 		return bad("Registration requires advertised address/port")
 	}
-	if e := a.Remote.Call(ctx, "registry", "POST", "/serviceregistry/system-discovery/register", Document{"version": "5.2.2", "addresses": []string{a.Config.AdvertiseAddress}, "metadata": Document{"implementation": "Go"}}, nil); e != nil {
+	if e := a.Remote.Call(ctx, "registry", "POST", "/serviceregistry/system-discovery/register", Document{"version": "5.4.0", "addresses": []string{a.Config.AdvertiseAddress}, "metadata": Document{"implementation": "Go"}}, nil); e != nil {
 		return e
 	}
 	for _, s := range a.Services() {
