@@ -1,5 +1,5 @@
 {
-  "baselineSource": "Arrowhead/ah5-core-go",
+  "baselineSource": "OLD/Arrowhead/ah5-core-go",
   "sourceModified": false,
   "testExitCode": 1,
   "registryBinary": "ah5-core-go/serviceregistry/bin/ServiceRegistry"
