@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,hashlib,json,re
+import argparse,hashlib,json,os,re
 parser=argparse.ArgumentParser();parser.add_argument('--check-originals',action='store_true');options=parser.parse_args()
 r=Path(__file__).resolve().parents[1];modules=json.loads((r/'systems.json').read_text());errors=[]
 for m in modules:
@@ -16,8 +16,12 @@ for m in modules:
  print(m['name']+': independent module layout OK')
 # Hashes show the packaging operation did not modify any source files.
 manifest=json.loads((r/'SOURCE-MANIFEST.json').read_text())
+# Manifest paths are relative to the workspace folder that holds this repository; $GOMODCACHE/ is the Go module cache.
+def original(raw):
+ if raw.startswith('$GOMODCACHE/'):return Path(os.environ.get('GOMODCACHE') or Path.home()/'go/pkg/mod')/raw[len('$GOMODCACHE/'):]
+ return Path(raw) if Path(raw).is_absolute() else r.parent/raw
 for raw,expected in manifest['sourceFiles'].items():
- p=Path(raw)
+ p=original(raw)
  if not p.is_file():
   if options.check_originals:errors.append('Original source missing: '+raw)
   continue

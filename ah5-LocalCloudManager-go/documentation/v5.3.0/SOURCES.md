@@ -1,6 +1,6 @@
 # Sources and maintenance
 
-Primary policy: `/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/PRIMARY-SOURCES.md`.
+Primary policy: `PRIMARY-SOURCES.md` in the workspace folder that holds this repository.
 
 Baseline: `Eclipse-Arrowhead-go/ah5-LocalCloudManager-go/documentation/LocalCloudManager/v5.2.2`. This folder was copied into the new edition without modifying its source. Existing system/operation/DTO descriptions and historical verification records are inherited from that baseline. Document metadata, local document references and bibliography edition numbers have been updated. Runtime version literals, dependency versions, wire payload identifiers and historical dates retain their original meanings.
 

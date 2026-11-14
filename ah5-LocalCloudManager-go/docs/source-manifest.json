@@ -164,7 +164,7 @@
     }
   ],
   "notice": "Canonical relocation; deployment copy retained; no live secrets/state copied; registration metadata differs from handlers",
-  "referenceRoot": "/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/Arrowhead-test-cloud-go/native-go",
+  "referenceRoot": "Arrowhead/Arrowhead-test-cloud-go/native-go",
   "referenceSHA256": {
     "cmd/arrowhead/main.go": "4ebc507d827c5cc8dfc6587ce1c37cd65b32638ba514e843c62466037ec315e7",
     "go.mod": "c31b05d031db5acd8b4382672a5d0793eb0c30ebd2755bd6ac9b6e19b6d24eea",

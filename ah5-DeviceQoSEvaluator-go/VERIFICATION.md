@@ -6,8 +6,8 @@
 
 Reference roots:
 
-- `/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-support-java-spring/`
-- `/Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Arrowhead/ah5-common-java-spring/`
+- `Arrowhead/ah5-support-java-spring/`
+- `Arrowhead/ah5-common-java-spring/`
 
 The exact local source hashes, including shared Java support runtime and 417 common Java files, are in `documentation/contracts.json`. This is a local-reference port, not verification of a pristine upstream release tag.
 

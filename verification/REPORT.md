@@ -1,6 +1,6 @@
 # Eclipse-Arrowhead-go reorganization verification
 
-Completed 2026-10-28. Destination: /Users/jerkerdelsing/Work/lule/EISLAB/Project/Eclipse/Eclipse-Arrowhead-go/.
+Completed 2026-10-28. Destination: Eclipse-Arrowhead-go/.
 
 ## Result
 
